@@ -1,13 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import AppConfig from "./config";
+import AppNavigator from "./router";
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Particle Setup React Native Home Screen</Text>
-      </View>
-    );
+    return <AppNavigator />;
   }
 }
 

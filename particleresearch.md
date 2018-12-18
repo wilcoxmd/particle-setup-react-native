@@ -29,3 +29,48 @@ Note that when you pass the `pwd` paramenter during network configuration, it ne
 As per [React Native documentation on plain http requests](https://facebook.github.io/react-native/docs/network):
 
 > By default, iOS will block any request that's not encrypted using SSL. If you need to fetch from a cleartext URL (one that begins with http) you will first need to add an [App Transport Security exception](https://facebook.github.io/react-native/docs/integration-with-existing-apps#test-your-integration). If you know ahead of time what domains you will need access to, it is more secure to add exceptions just for those domains; if the domains are not known until runtime you can disable [ATS completely](https://facebook.github.io/react-native/docs/integration-with-existing-apps#app-transport-security). Note however that from January 2017, Apple's App Store review will require reasonable justification for disabling ATS. See [Apple's documentation](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CocoaKeys.html#//apple_ref/doc/uid/TP40009251-SW33) for more information.
+
+## Device Claiming
+
+Before a device ever gets to the field, you need to get the ID numbers from them and add them to your product with:
+
+```
+$ curl -X POST https://api.particle.io/v1/products/PRODUCT_ID/devices -d access_token=ACCESS_TOKEN -d id=DEVICE_ID
+```
+
+Once the device is added to your product, you can start allowing customers to claim it.
+
+1. Make sure the customer has an access token
+2. Connect to the device's network
+3. Grab its ID nubmer and private key once connected
+4. Configure Wi-Fi credentials
+5. Wait for device connection, then claim device to customer account using:
+
+```
+curl -X POST \
+  https://api.particle.io/v1/devices \
+  -H 'Authorization: Bearer ACCESS_TOKEN' \
+  -d id=DEVICE_ID \
+  -d request_transfer=true
+
+```
+
+Alternatively, you can send a claim code to the device instead of doing step 5. The claim code allows you to make the API call before knowing the device ID and before connecting to the Photon/P1 Wi-Fi. The claim code is passed to the device, which then connects to Wi-Fi and passes the information to the cloud, which associates the device and the account that created the claim code.
+
+```
+$ curl -X POST https://api.particle.io/v1/products/PRODUCT_ID/device_claims?access_token=ACCESS_TOKEN
+```
+
+which will return something like:
+
+```
+{"claim_code":"3GjxEdDu3eIWEs5C9WMun5etWsIC7KreXXHQ2JXAfBorHv+t26F04cFObo/FsL5","device_ids":[]}
+```
+
+After creating this claim code, you can send it to the device using:
+
+```
+curl -X POST -d '{"k":"cc","v":"3GjxEdDu3eIWEs5C9WMun5etWsIC7KreXXHQ2JXAfBorHv+t26F04cFObo/FsL5"}' http://192.168.0.1/set
+```
+
+If you did it correctly, the result should be: `{"r": 0}`.
