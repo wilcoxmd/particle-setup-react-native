@@ -1,6 +1,14 @@
 import React from "react";
-import { View, Text, Button, AsyncStorage } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  AsyncStorage,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import CustomStyles from "../styleconfig";
 
 export class AccountScreen extends React.Component {
   static navigationOptions = {
@@ -13,14 +21,10 @@ export class AccountScreen extends React.Component {
 
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "center"
-        }}
-      >
-        <Button title="Super Easy Sign Out!" onPress={this._signOutAsync} />
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <TouchableOpacity onPress={this._signOutAsync}>
+          <Text style={styles.button}>Sign Out</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -30,3 +34,15 @@ export class AccountScreen extends React.Component {
     this.props.navigation.navigate("SignIn");
   };
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: CustomStyles.buttonBackgroundColor,
+    padding: CustomStyles.buttonPadding,
+    borderRadius: CustomStyles.buttonBorderRadius,
+    fontWeight: CustomStyles.buttonFontWeight,
+    textAlign: CustomStyles.buttonTextAlign,
+    color: CustomStyles.buttonTextColor,
+    width: CustomStyles.buttonWidth
+  }
+});

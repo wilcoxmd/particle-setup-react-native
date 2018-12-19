@@ -4,15 +4,6 @@ import AppConfig from "./config";
 import AppNavigator from "./router";
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      signedIn: false,
-      checkedSignIn: false
-    };
-  }
-
   render() {
     return <AppNavigator />;
   }
