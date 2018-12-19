@@ -36,13 +36,5 @@ export class AccountScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: CustomStyles.buttonBackgroundColor,
-    padding: CustomStyles.buttonPadding,
-    borderRadius: CustomStyles.buttonBorderRadius,
-    fontWeight: CustomStyles.buttonFontWeight,
-    textAlign: CustomStyles.buttonTextAlign,
-    color: CustomStyles.buttonTextColor,
-    width: CustomStyles.buttonWidth
-  }
+  button: CustomStyles.buttonStyles
 });
