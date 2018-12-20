@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Button,
+  Image,
   TextInput,
   AsyncStorage,
   TouchableOpacity,
@@ -27,7 +28,21 @@ export class SignInScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <View style={{ width: 250, height: 100 }}>
+          <Image
+            source={require("../assets/logo-main.png")}
+            style={{ width: 250 }}
+            resizeMode="contain"
+          />
+        </View>
         <Text style={{ marginBottom: 25 }}>Sign in to your account:</Text>
         <TextInput
           style={styles.input}
