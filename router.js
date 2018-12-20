@@ -10,14 +10,26 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { SignInScreen } from "./screens/SignInScreen";
 import { AccountScreen } from "./screens/AccountScreen.js";
 import { AuthLoadingScreen } from "./screens/AuthLoadingScreen";
-
-const AppStack = createBottomTabNavigator({
-  Home: HomeScreen,
-  Account: AccountScreen
-});
+import { GetIdScreen } from "./screens/GetIdScreen";
+import { SetupNeedsScreen } from "./screens/SetupNeedsScreen";
+import { ScanWifiScreen } from "./screens/ScanWifiScreen";
+import { SetupDeviceScreen } from "./screens/SetupDeviceScreen";
 
 const AuthStack = createStackNavigator({
   SignIn: SignInScreen
+});
+
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+  SetupNeeds: SetupNeedsScreen,
+  GetId: GetIdScreen,
+  ScanWifi: ScanWifiScreen,
+  SetupDevice: SetupDeviceScreen
+});
+
+const AppStack = createBottomTabNavigator({
+  Home: HomeStack,
+  Account: AccountScreen
 });
 
 export default createAppContainer(
