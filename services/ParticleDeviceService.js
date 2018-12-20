@@ -12,7 +12,7 @@ class ParticleDeviceService {
       });
       const data = await response.json();
       //response format: {"id":"280020008761353136383631","c":"1"}
-      await this.disconnectFromDevice();
+      await this.connectToNetwork();
       return data.id;
     } catch (err) {
       return "Hmm...Couldn't find your device. Did you connect to it's Wi-Fi network?";

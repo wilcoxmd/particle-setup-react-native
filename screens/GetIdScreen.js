@@ -19,8 +19,9 @@ export class GetIdScreen extends React.Component {
     super(props);
   }
 
-  handlePress() {
-    const deviceid = ParticleDeviceService.fetchDeviceId();
+  async handlePress() {
+    console.log("handle press fired.");
+    const deviceid = await ParticleDeviceService.fetchDeviceId();
     console.log(`device id: ${deviceid}`);
   }
 
@@ -28,7 +29,7 @@ export class GetIdScreen extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>This screen lets us get a device ID.</Text>
-        <TouchableOpacity onPress={() => this.handlePress}>
+        <TouchableOpacity onPress={async () => this.handlePress()}>
           <Text style={style.button}>Get ID!</Text>
         </TouchableOpacity>
       </View>
