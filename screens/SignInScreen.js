@@ -90,7 +90,7 @@ export class SignInScreen extends React.Component {
         let responseJson = await response.json();
         if (responseJson.token) {
           console.log("Sign in Success");
-          await AsyncStorage.setItem("userToken", "abc");
+          await AsyncStorage.setItem("userToken", AppConfig.testAccessToken);
           this.props.navigation.navigate("App");
         } else {
           throw new Error(`Got unexpected response: ${responseJson}`);
