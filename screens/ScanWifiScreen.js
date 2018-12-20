@@ -12,16 +12,49 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
+import ParticleDeviceService from "../services/ParticleDeviceService";
 
 export class ScanWifiScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      buttonText: "Scan Networks"
+    };
   }
+
+  async scanNetworks() {
+    this.setState({ buttonText: "Scanning..." });
+    try {
+      console.log("starting scan...");
+      const availableNetworks = await ParticleDeviceService.scanAP();
+      console.log(`available networks: ${availableNetworks}`);
+      this.setState({ buttonText: "Re-Scan Networks" });
+      console.log("navigating");
+      this.props.navigation.navigate("AvailableNetworks", {
+        networks: availableNetworks
+      });
+    } catch (err) {
+      console.log(err);
+      this.setState({ buttonText: "Re-Scan Networks" });
+    }
+  }
+
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>This screen lets us scan wifi</Text>
+        <Text style={{ marginBottom: 10 }}>This screen lets us scan wifi</Text>
+        <TouchableOpacity
+          onPress={async () => {
+            this.scanNetworks();
+          }}
+        >
+          <Text style={style.button}>{this.state.buttonText}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
+
+const style = {
+  button: CustomStyles.buttonStyles
+};

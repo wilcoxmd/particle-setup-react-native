@@ -28,6 +28,23 @@ const CustomStyles = {
     color: "white",
     width: 250,
     marginTop: 25
+  },
+
+  networkOption: {
+    backgroundColor: "#e4b523",
+    padding: 15,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
+    width: 250,
+    marginTop: 15,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+  networkOptionText: {
+    color: "white",
+    fontWeight: "bold"
   }
 };
 

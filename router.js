@@ -14,6 +14,8 @@ import { GetIdScreen } from "./screens/GetIdScreen";
 import { SetupNeedsScreen } from "./screens/SetupNeedsScreen";
 import { ScanWifiScreen } from "./screens/ScanWifiScreen";
 import { SetupDeviceScreen } from "./screens/SetupDeviceScreen";
+import { AvailableNetworksScreen } from "./screens/AvailableNetworksScreen";
+import { SetPasswordScreen } from "./screens/SetPasswordScreen";
 
 const AuthStack = createStackNavigator({
   SignIn: SignInScreen
@@ -24,7 +26,9 @@ const HomeStack = createStackNavigator({
   SetupNeeds: SetupNeedsScreen,
   GetId: GetIdScreen,
   ScanWifi: ScanWifiScreen,
-  SetupDevice: SetupDeviceScreen
+  SetupDevice: SetupDeviceScreen,
+  AvailableNetworks: AvailableNetworksScreen,
+  SetPassword: SetPasswordScreen
 });
 
 const AppStack = createBottomTabNavigator({
