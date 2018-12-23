@@ -1,3 +1,4 @@
+var Buffer = require("buffer").Buffer;
 var RSAKey = require("react-native-rsa");
 
 const deviceUrl = "http://192.168.0.1";
@@ -71,26 +72,35 @@ class ParticleDeviceService {
     }
   }
 
-  static encryptPassword(key, password) {
-    //console.log("encrypting passkey...");
-    const keyBuf = new Buffer(key, "hex");
-    //console.log(keyBuf);
-    const rsa = new RSAKey();
-    rsa.setPublicString(keyBuf.slice(22));
-
-    // const rsa = new NodeRSA(keyBuf.slice(22), 'pkcs1-public-der', {
-    //   encryptionScheme: 'pkcs1'
-    // });
-
-    const encryptedPass = rsa.encrypt(password);
-    return encryptedPass;
-    //console.log("encrypted password: " + encryptedPass);
+  static encryptPassword(derKey, password) {
+    //derKey is the device public key, which is in DER
+    //react-native-rsa needs to take in a public key object with
+    //with members n = modulus, and e = exponent
+    //DER key modulus is encoded at hex bytes 28 - 156. It's a hex number string, so we have to double to go to proper spot.
+    //standard exponent is 0x10001.
+    //both modulus and exponent need to be passed in as hex strings
+    //for more info on decoding DER keys - see this post:
+    //https://crypto.stackexchange.com/a/35105
+    const keyModString = derKey.slice(28 * 2, 157 * 2);
+    let rsa = new RSAKey();
+    const publicKey = {
+      n: keyModString,
+      e: "10001"
+    };
+    console.log(`N: ${publicKey.n}, e: ${publicKey.e}`);
+    publicKeyString = JSON.stringify(publicKey);
+    rsa.setPublicString(publicKeyString); //expects JSON string object with modulus field (n) and exponent field (e)
+    let encryptedPassword = rsa.encrypt(password);
+    return encryptedPassword;
   }
 
   static async configureAP(network, password) {
     try {
+      console.log(`received password ${password}`);
       const key = await this.getPublicKey();
+      console.log(`got public key: ${key}`);
       const encryptedPass = this.encryptPassword(key, password);
+      console.log("encrypted password");
 
       const setupInfo = JSON.stringify({
         idx: 0,
@@ -99,6 +109,7 @@ class ParticleDeviceService {
         ch: network.ch,
         pwd: encryptedPass
       });
+      console.log(`sending network info to device: ${setupInfo}`);
 
       const response = await fetch(deviceUrl + "/configure-ap", {
         method: "POST",
@@ -108,8 +119,8 @@ class ParticleDeviceService {
         }
       });
       const data = await response.json();
+      console.log(`response from device: ${JSON.stringify(data)}`);
       return data;
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
