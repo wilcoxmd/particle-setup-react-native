@@ -147,6 +147,31 @@ class ParticleDeviceService {
       console.log(err);
     }
   }
+
+  static async addDeviceToProduct(productID, productBearerToken, deviceID) {
+    //need to add device to product number before it can be claimed.
+    try {
+      const requestBody = {
+        access_token: productBearerToken,
+        id: deviceID
+      };
+      const result = await fetch(
+        `https://api.particle.io/v1/products/${productID}/devices`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: JSON.stringify(requestBody)
+        }
+      );
+      const response = await result.json();
+      const data = JSON.stringify(response);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default ParticleDeviceService;
