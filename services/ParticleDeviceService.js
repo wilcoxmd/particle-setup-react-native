@@ -142,7 +142,8 @@ class ParticleDeviceService {
 
       const response = await result.json();
       const data = JSON.stringify(response);
-      console.log(data);
+      console.log(`product bearer token data: ${data}`);
+      return data.access_token;
     } catch (err) {
       console.log(err);
     }
