@@ -1,5 +1,7 @@
 var Buffer = require("buffer").Buffer;
 var RSAKey = require("react-native-rsa");
+import { decode as atob, encode as btoa } from "base-64";
+import AppConfig from "../config";
 
 const deviceUrl = "http://192.168.0.1";
 
@@ -121,6 +123,26 @@ class ParticleDeviceService {
       const data = await response.json();
       console.log(`response from device: ${JSON.stringify(data)}`);
       return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  static async createClaimCode() {
+    try {
+      let result = await fetch("https://api.particle.io/oauth/token", {
+        body: "grant_type=client_credentials",
+        headers: {
+          Authorization:
+            "Basic " + btoa(AppConfig.clientId + ":" + AppConfig.clientSecret),
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST"
+      });
+
+      const response = await result.json();
+      const data = JSON.stringify(response);
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
