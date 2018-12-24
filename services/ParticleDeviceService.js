@@ -128,7 +128,7 @@ class ParticleDeviceService {
     }
   }
 
-  static async createClaimCode() {
+  static async getProductBearerToken() {
     try {
       let result = await fetch("https://api.particle.io/oauth/token", {
         body: "grant_type=client_credentials",
