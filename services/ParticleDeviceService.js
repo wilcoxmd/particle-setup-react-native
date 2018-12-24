@@ -173,6 +173,26 @@ class ParticleDeviceService {
       console.log(err);
     }
   }
+
+  static async getProductClaimCode(productID, customerAccessToken) {
+    try {
+      const result = await fetch(
+        `https://api.particle.io/v1/products/${productID}/device_claims?access_token=${customerAccessToken}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }
+      );
+      const response = await result.json();
+      const data = JSON.stringify(response);
+      console.log(`product claim code data: ${data}`);
+      return response.claim_code;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default ParticleDeviceService;
