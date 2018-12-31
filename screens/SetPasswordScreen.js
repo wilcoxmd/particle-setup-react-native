@@ -28,21 +28,28 @@ export class SetPasswordScreen extends React.Component {
       console.log("configuring device to network...");
       const { navigation } = this.props;
       const network = navigation.getParam("network", "get networks error.");
-      let result = await ParticleDeviceService.configureAP(
+      const deviceClaimCode = navigation.getParam("deviceClaimCode", null);
+
+      let successScreen = "";
+      if (deviceClaimCode) {
+        successScreen = "MonitorClaim";
+      } else {
+        successScreen = "WiFiConnectSuccess";
+      }
+
+      let configured = await ParticleDeviceService.configureAP(
         network,
         this.state.passwordText
       );
+
       console.log("connecting...");
       let connected = await ParticleDeviceService.connectToNetwork();
 
-      const deviceClaimCode = navigation.getParam("deviceClaimCode", null);
-      if (deviceClaimCode) {
-        //TODO: this.props.navigation.navigate("MonitorClaim");
-        console.log("proceed to monitor claim");
-      } else if (!deviceClaimCode && connected) {
-        this.props.navigation.navigate("WiFiConnectSuccess");
+      if (configured && connected) {
+        this.props.navigation.navigate(successScreen);
       } else {
         //TODO: show error screen.
+        //this.props.navigation.navifate(errorScreen);
       }
     } catch (err) {
       console.log(err);

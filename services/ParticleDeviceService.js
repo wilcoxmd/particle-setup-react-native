@@ -126,7 +126,12 @@ class ParticleDeviceService {
       });
       const data = await response.json();
       console.log(`response from device: ${JSON.stringify(data)}`);
-      return data;
+      //result will be {'r': 0} if config was done properly.
+      if (data.r === 0) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (err) {
       console.log(err);
     }
