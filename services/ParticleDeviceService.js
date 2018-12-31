@@ -193,6 +193,30 @@ class ParticleDeviceService {
       console.log(err);
     }
   }
+
+  static async setClaimCode(claimCode) {
+    try {
+      const requestBody = {
+        k: "cc",
+        v: claimCode
+      };
+
+      const result = await fetch(`${deviceUrl}/set`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      const response = await result.json();
+      const data = JSON.stringify(response);
+      console.log(`device response: ${data}`);
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
 }
 
 export default ParticleDeviceService;
