@@ -1,7 +1,5 @@
-var Buffer = require("buffer").Buffer;
 var RSAKey = require("react-native-rsa");
-import { decode as atob, encode as btoa } from "base-64";
-import AppConfig from "../config";
+import { encode as btoa } from "base-64";
 
 const deviceUrl = "http://192.168.0.1";
 
@@ -17,7 +15,6 @@ class ParticleDeviceSetup {
       await this.connectToNetwork();
       return data.id;
     } catch (err) {
-      return "Hmm...Couldn't find your device. Did you connect to it's Wi-Fi network?";
       console.log(err);
     }
   }
@@ -63,7 +60,6 @@ class ParticleDeviceSetup {
 
   static async getPublicKey() {
     try {
-      //console.log("getting public key...");
       const response = await fetch(deviceUrl + "/public-key", {
         method: "GET",
         dataType: "JSON"
@@ -92,7 +88,6 @@ class ParticleDeviceSetup {
       n: keyModString,
       e: keyExpString
     };
-    console.log(`N: ${publicKey.n}, e: ${publicKey.e}`);
     publicKeyString = JSON.stringify(publicKey);
     rsa.setPublicString(publicKeyString); //expects JSON string object with modulus field (n) and exponent field (e)
     let encryptedPassword = rsa.encrypt(password);
@@ -129,13 +124,12 @@ class ParticleDeviceSetup {
     }
   }
 
-  static async getProductBearerToken() {
+  static async getProductBearerToken(clientId, clientSecret) {
     try {
       let result = await fetch("https://api.particle.io/oauth/token", {
         body: "grant_type=client_credentials",
         headers: {
-          Authorization:
-            "Basic " + btoa(AppConfig.clientId + ":" + AppConfig.clientSecret),
+          Authorization: "Basic " + btoa(clientId + ":" + clientSecret),
           "Content-Type": "application/x-www-form-urlencoded"
         },
         method: "POST"
