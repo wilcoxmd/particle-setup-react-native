@@ -12,7 +12,7 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
-import ParticleDeviceService from "../services/ParticleDeviceService";
+import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 
 export class AvailableNetworksScreen extends React.Component {
   onPressHandler(selectedNetwork) {

@@ -12,7 +12,7 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
-import ParticleDeviceService from "../services/ParticleDeviceService";
+import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { ScanWifiScreen } from "./ScanWifiScreen";
 
 export class SetupDeviceScreen extends React.Component {
@@ -25,7 +25,7 @@ export class SetupDeviceScreen extends React.Component {
 
   async componentDidMount() {
     try {
-      const deviceClaimCode = await ParticleDeviceService.getProductClaimCode(
+      const deviceClaimCode = await ParticleDeviceSetup.getProductClaimCode(
         AppConfig.productId,
         AppConfig.testAccessToken
       );

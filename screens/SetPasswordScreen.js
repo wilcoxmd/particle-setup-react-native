@@ -12,7 +12,7 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
-import ParticleDeviceService from "../services/ParticleDeviceService";
+import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 
 export class SetPasswordScreen extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ export class SetPasswordScreen extends React.Component {
       let successScreen = "";
       if (deviceClaimCode) {
         console.log(`setting claim code: ${deviceClaimCode}`);
-        const claimSetResponse = await ParticleDeviceService.setClaimCode(
+        const claimSetResponse = await ParticleDeviceSetup.setClaimCode(
           deviceClaimCode
         );
         //TODO: route to a screen to monitor device claim process, and verify success.
@@ -42,13 +42,13 @@ export class SetPasswordScreen extends React.Component {
         successScreen = "WiFiConnectSuccess";
       }
 
-      let configured = await ParticleDeviceService.configureAP(
+      let configured = await ParticleDeviceSetup.configureAP(
         network,
         this.state.passwordText
       );
 
       console.log("connecting...");
-      let connected = await ParticleDeviceService.connectToNetwork();
+      let connected = await ParticleDeviceSetup.connectToNetwork();
 
       if (configured && connected) {
         this.props.navigation.navigate(successScreen);

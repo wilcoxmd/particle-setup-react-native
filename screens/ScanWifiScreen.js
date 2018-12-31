@@ -12,7 +12,7 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
-import ParticleDeviceService from "../services/ParticleDeviceService";
+import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 
 export class ScanWifiScreen extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export class ScanWifiScreen extends React.Component {
     this.setState({ buttonText: "Scanning..." });
     try {
       console.log("starting scan...");
-      const availableNetworks = await ParticleDeviceService.scanAP();
+      const availableNetworks = await ParticleDeviceSetup.scanAP();
       console.log(`available networks: ${availableNetworks}`);
       this.setState({ buttonText: "Re-Scan Networks" });
       console.log("navigating");

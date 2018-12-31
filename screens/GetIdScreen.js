@@ -12,7 +12,7 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
-import ParticleDeviceService from "../services/ParticleDeviceService";
+import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 
 export class GetIdScreen extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export class GetIdScreen extends React.Component {
 
   async handlePress() {
     console.log("handle press fired.");
-    const deviceid = await ParticleDeviceService.fetchDeviceId();
+    const deviceid = await ParticleDeviceSetup.fetchDeviceId();
     console.log(`device id: ${deviceid}`);
     this.setState({
       deviceIdNumber: deviceid,

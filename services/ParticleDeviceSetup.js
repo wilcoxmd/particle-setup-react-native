@@ -5,7 +5,7 @@ import AppConfig from "../config";
 
 const deviceUrl = "http://192.168.0.1";
 
-class ParticleDeviceService {
+class ParticleDeviceSetup {
   static async fetchDeviceId() {
     console.log("getting device id:");
     try {
@@ -228,4 +228,4 @@ class ParticleDeviceService {
   }
 }
 
-export default ParticleDeviceService;
+export default ParticleDeviceSetup;
