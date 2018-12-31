@@ -7,7 +7,6 @@ const deviceUrl = "http://192.168.0.1";
 
 class ParticleDeviceSetup {
   static async fetchDeviceId() {
-    console.log("getting device id:");
     try {
       const response = await fetch(deviceUrl + "/device-id", {
         method: "GET",
@@ -102,12 +101,8 @@ class ParticleDeviceSetup {
 
   static async configureAP(network, password) {
     try {
-      console.log(`received password ${password}`);
       const key = await this.getPublicKey();
-      console.log(`got public key: ${key}`);
       const encryptedPass = this.encryptPassword(key, password);
-      console.log("encrypted password");
-
       const setupInfo = JSON.stringify({
         idx: 0,
         ssid: network.ssid,
@@ -115,8 +110,6 @@ class ParticleDeviceSetup {
         ch: network.ch,
         pwd: encryptedPass
       });
-      console.log(`sending network info to device: ${setupInfo}`);
-
       const response = await fetch(deviceUrl + "/configure-ap", {
         method: "POST",
         body: setupInfo,
@@ -125,7 +118,6 @@ class ParticleDeviceSetup {
         }
       });
       const data = await response.json();
-      console.log(`response from device: ${JSON.stringify(data)}`);
       //result will be {'r': 0} if config was done properly.
       if (data.r === 0) {
         return true;
@@ -151,7 +143,6 @@ class ParticleDeviceSetup {
 
       const response = await result.json();
       const data = JSON.stringify(response);
-      console.log(`product bearer token data: ${data}`);
       return data.access_token;
     } catch (err) {
       console.log(err);
@@ -177,7 +168,7 @@ class ParticleDeviceSetup {
       );
       const response = await result.json();
       const data = JSON.stringify(response);
-      console.log(data);
+      return response;
     } catch (err) {
       console.log(err);
     }
@@ -196,7 +187,6 @@ class ParticleDeviceSetup {
       );
       const response = await result.json();
       const data = JSON.stringify(response);
-      console.log(`product claim code data: ${data}`);
       return response.claim_code;
     } catch (err) {
       console.log(err);
@@ -220,7 +210,6 @@ class ParticleDeviceSetup {
 
       const response = await result.json();
       const data = JSON.stringify(response);
-      console.log(`device response: ${data}`);
       return response;
     } catch (err) {
       console.log(err);
