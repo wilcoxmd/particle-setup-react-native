@@ -32,7 +32,12 @@ export class SetPasswordScreen extends React.Component {
 
       let successScreen = "";
       if (deviceClaimCode) {
-        successScreen = "MonitorClaim";
+        console.log(`setting claim code: ${deviceClaimCode}`);
+        const claimSetResponse = await ParticleDeviceService.setClaimCode(
+          deviceClaimCode
+        );
+        //TODO: route to a screen to monitor device claim process, and verify success.
+        successScreen = "WiFiConnectSuccess";
       } else {
         successScreen = "WiFiConnectSuccess";
       }

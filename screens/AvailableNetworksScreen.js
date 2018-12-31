@@ -17,7 +17,6 @@ import ParticleDeviceService from "../services/ParticleDeviceService";
 export class AvailableNetworksScreen extends React.Component {
   onPressHandler(selectedNetwork) {
     console.log("navigating");
-    console.log(`we found claim code: ${deviceClaimCode}`);
     console.log(`sending network: ${selectedNetwork.ssid}`);
 
     const { navigation } = this.props;
