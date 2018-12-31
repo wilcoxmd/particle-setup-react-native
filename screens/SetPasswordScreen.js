@@ -39,9 +39,7 @@ export class SetPasswordScreen extends React.Component {
       if (deviceClaimCode) {
         //TODO: this.props.navigation.navigate("MonitorClaim");
         console.log("proceed to monitor claim");
-      }
-
-      if (connected) {
+      } else if (!deviceClaimCode && connected) {
         this.props.navigation.navigate("WiFiConnectSuccess");
       } else {
         //TODO: show error screen.
