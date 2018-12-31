@@ -79,15 +79,17 @@ class ParticleDeviceService {
     //react-native-rsa needs to take in a public key object with
     //with members n = modulus, and e = exponent
     //DER key modulus is encoded at hex bytes 28 - 156. It's a hex number string, so we have to double to go to proper spot.
-    //standard exponent is 0x10001.
+    //standard exponent is 0x10001, and is located starting at byte 160 and ending at 162
     //both modulus and exponent need to be passed in as hex strings
     //for more info on decoding DER keys - see this post:
     //https://crypto.stackexchange.com/a/35105
     const keyModString = derKey.slice(28 * 2, 157 * 2);
+    const keyExpString = derKey.slice(159 * 2, 162 * 2);
+    console.log(`keyExpString = ${keyExpString}`);
     let rsa = new RSAKey();
     const publicKey = {
       n: keyModString,
-      e: "10001"
+      e: keyExpString
     };
     console.log(`N: ${publicKey.n}, e: ${publicKey.e}`);
     publicKeyString = JSON.stringify(publicKey);
