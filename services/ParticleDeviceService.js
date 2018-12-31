@@ -32,8 +32,11 @@ class ParticleDeviceService {
           "Content-Type": "application/x-www-form-urlencoded"
         }
       });
+      //response returns {'r': 0} on success
       const data = await response.json();
-      return data;
+      if (data.r === 0) {
+        return true;
+      } else return false;
     } catch (err) {
       console.log(err);
     }
@@ -85,7 +88,6 @@ class ParticleDeviceService {
     //https://crypto.stackexchange.com/a/35105
     const keyModString = derKey.slice(28 * 2, 157 * 2);
     const keyExpString = derKey.slice(159 * 2, 162 * 2);
-    console.log(`keyExpString = ${keyExpString}`);
     let rsa = new RSAKey();
     const publicKey = {
       n: keyModString,

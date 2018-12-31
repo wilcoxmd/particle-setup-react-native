@@ -12,16 +12,48 @@ import {
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
+import ParticleDeviceService from "../services/ParticleDeviceService";
+import { ScanWifiScreen } from "./ScanWifiScreen";
 
 export class SetupDeviceScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      deviceClaimCode: null
+    };
   }
+
+  async componentDidMount() {
+    try {
+      const deviceClaimCode = await ParticleDeviceService.getProductClaimCode(
+        AppConfig.productId,
+        AppConfig.testAccessToken
+      );
+      this.setState({ deviceClaimCode: deviceClaimCode });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  handleReady() {
+    this.props.navigation.navigate("ScanWifi", {
+      deviceClaimCode: this.state.deviceClaimCode
+    });
+  }
+
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text>This screen lets us claim a new device</Text>
+        <TouchableOpacity onPress={() => this.handleReady()}>
+          <Text style={styles.setupOption}>Ready</Text>
+        </TouchableOpacity>
+        <Text>Our claim code: {this.state.deviceClaimCode}</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  setupOption: CustomStyles.setupOption
+});

@@ -23,6 +23,8 @@ export class ScanWifiScreen extends React.Component {
   }
 
   async scanNetworks() {
+    const { navigation } = this.props;
+    const deviceClaimCode = navigation.getParam("deviceClaimCode", null);
     this.setState({ buttonText: "Scanning..." });
     try {
       console.log("starting scan...");
@@ -31,7 +33,8 @@ export class ScanWifiScreen extends React.Component {
       this.setState({ buttonText: "Re-Scan Networks" });
       console.log("navigating");
       this.props.navigation.navigate("AvailableNetworks", {
-        networks: availableNetworks
+        networks: availableNetworks,
+        deviceClaimCode: deviceClaimCode
       });
     } catch (err) {
       console.log(err);
@@ -50,6 +53,9 @@ export class ScanWifiScreen extends React.Component {
         >
           <Text style={style.button}>{this.state.buttonText}</Text>
         </TouchableOpacity>
+        {this.props.deviceClaimCode ? (
+          <Text>{this.props.deviceClaimCode}</Text>
+        ) : null}
       </View>
     );
   }
