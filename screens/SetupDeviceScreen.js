@@ -16,6 +16,10 @@ import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { ScanWifiScreen } from "./ScanWifiScreen";
 
 export class SetupDeviceScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "SetupDevice"
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -55,5 +59,9 @@ export class SetupDeviceScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  setupOption: CustomStyles.setupOption
+  setupOption: CustomStyles.setupOption,
+  icon: {
+    width: 24,
+    height: 24
+  }
 });

@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import {
   createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createDrawerNavigator
 } from "react-navigation";
 import { HomeScreen } from "./screens/HomeScreen";
 import { SignInScreen } from "./screens/SignInScreen";
@@ -22,27 +23,98 @@ const AuthStack = createStackNavigator({
   SignIn: SignInScreen
 });
 
+// const HomeStack = createStackNavigator({
+//   Home: HomeScreen,
+//   SetupNeeds: SetupNeedsScreen,
+//   GetId: GetIdScreen,
+//   ScanWifi: ScanWifiScreen,
+//   SetupDevice: SetupDeviceScreen,
+//   AvailableNetworks: AvailableNetworksScreen,
+//   SetPassword: SetPasswordScreen,
+//   WiFiConnectSuccess: WifiConnectSuccessScreen
+// });
+
+// const AppStack = createBottomTabNavigator({
+//   Home: HomeStack,
+//   Account: AccountScreen
+// });
+
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-  SetupNeeds: SetupNeedsScreen,
-  GetId: GetIdScreen,
-  ScanWifi: ScanWifiScreen,
+  Home: HomeScreen
+});
+
+HomeScreen.navigationOptions = function(props) {
+  return {
+    title: "Home",
+    headerVisible: true,
+    headerLeft: (
+      <Button onPress={() => props.navigation.openDrawer()} title="Menu" />
+    )
+  };
+};
+
+const SetupStack = createStackNavigator({
   SetupDevice: SetupDeviceScreen,
+  ScanWifi: ScanWifiScreen
+});
+
+SetupStack.navigationOptions = {
+  drawerLabel: "Setup New Device"
+};
+
+SetupDeviceScreen.navigationOptions = function(props) {
+  return {
+    title: "New Device Setup",
+    headerVisible: true,
+    headerLeft: (
+      <Button onPress={() => props.navigation.openDrawer()} title="Menu" />
+    )
+  };
+};
+
+const GetIDStack = createStackNavigator({
+  SetupNeeds: SetupNeedsScreen,
+  GetID: GetIdScreen
+});
+
+GetIDStack.navigationOptions = {
+  drawerLabel: "Get ID"
+};
+
+SetupNeedsScreen.navigationOptions = function(props) {
+  return {
+    title: "What you need",
+    headerVisible: true,
+    headerLeft: (
+      <Button onPress={() => props.navigation.openDrawer()} title="Menu" />
+    )
+  };
+};
+
+const ConfigureWifiStack = createStackNavigator({
+  SetupNeeds: SetupNeedsScreen,
+  ScanWifi: ScanWifiScreen,
   AvailableNetworks: AvailableNetworksScreen,
   SetPassword: SetPasswordScreen,
   WiFiConnectSuccess: WifiConnectSuccessScreen
 });
 
-const AppStack = createBottomTabNavigator({
+ConfigureWifiStack.navigationOptions = {
+  drawerLabel: "Configure Wi-Fi"
+};
+
+const DrawerNavigator = createDrawerNavigator({
   Home: HomeStack,
-  Account: AccountScreen
+  Setup: SetupStack,
+  ConfigureWifi: ConfigureWifiStack,
+  GetID: GetIDStack
 });
 
 export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
-      App: AppStack,
+      App: DrawerNavigator,
       Auth: AuthStack
     },
     {
