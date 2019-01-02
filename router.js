@@ -18,6 +18,7 @@ import { SetupDeviceScreen } from "./screens/SetupDeviceScreen";
 import { AvailableNetworksScreen } from "./screens/AvailableNetworksScreen";
 import { SetPasswordScreen } from "./screens/SetPasswordScreen";
 import { WifiConnectSuccessScreen } from "./screens/WiFiConnectSuccessScreen";
+import { LogOut } from "./screens/LogOut";
 
 const AuthStack = createStackNavigator({
   SignIn: SignInScreen
@@ -78,12 +79,12 @@ const GetIDStack = createStackNavigator({
 });
 
 GetIDStack.navigationOptions = {
-  drawerLabel: "Get ID"
+  drawerLabel: "Get Device ID"
 };
 
 SetupNeedsScreen.navigationOptions = function(props) {
   return {
-    title: "What you need",
+    title: "How to Connect",
     headerVisible: true,
     headerLeft: (
       <Button onPress={() => props.navigation.openDrawer()} title="Menu" />
@@ -103,11 +104,16 @@ ConfigureWifiStack.navigationOptions = {
   drawerLabel: "Configure Wi-Fi"
 };
 
+LogOut.navigationOptions = {
+  drawerLabel: "Log Out"
+};
+
 const DrawerNavigator = createDrawerNavigator({
   Home: HomeStack,
   Setup: SetupStack,
   ConfigureWifi: ConfigureWifiStack,
-  GetID: GetIDStack
+  GetID: GetIDStack,
+  LogOut: LogOut
 });
 
 export default createAppContainer(
