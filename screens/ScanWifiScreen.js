@@ -13,6 +13,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
+import { WifiInstructions } from "../components/WifiInstructions";
 
 export class ScanWifiScreen extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ export class ScanWifiScreen extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text style={{ marginBottom: 10 }}>This screen lets us scan wifi</Text>
+        <WifiInstructions />
         <TouchableOpacity
           onPress={async () => {
             this.scanNetworks();

@@ -25,6 +25,7 @@ export class SetPasswordScreen extends React.Component {
 
   async connectToNetwork() {
     try {
+      this.setState({ buttonText: "Connecting..." });
       console.log("configuring device to network...");
       const { navigation } = this.props;
       const network = navigation.getParam("network", "get networks error.");
@@ -51,6 +52,7 @@ export class SetPasswordScreen extends React.Component {
       let connected = await ParticleDeviceSetup.connectToNetwork();
 
       if (configured && connected) {
+        this.setState({ buttonText: "Connect" });
         this.props.navigation.navigate(successScreen);
       } else {
         //TODO: show error screen.

@@ -14,6 +14,7 @@ import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
 import { GetIdScreen } from "./GetIdScreen";
 import { ScanWifiScreen } from "./ScanWifiScreen";
+import { GetReadyChecklist } from "../components/GetReadyChecklist";
 
 export class SetupNeedsScreen extends React.Component {
   constructor(props) {
@@ -43,11 +44,9 @@ export class SetupNeedsScreen extends React.Component {
     const nextScreen = navigation.getParam("nextScreen", "screen not passed");
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ marginBottom: 25, width: 250 }}>
-          This screen shows what we need to connect to a device
-        </Text>
+        <GetReadyChecklist />
         <TouchableOpacity onPress={() => this.navigateToNextScreen()}>
-          <Text style={styles.button}>Next</Text>
+          <Text style={styles.button}>Ready</Text>
         </TouchableOpacity>
       </View>
     );

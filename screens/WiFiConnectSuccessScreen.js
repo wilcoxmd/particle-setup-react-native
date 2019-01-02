@@ -9,10 +9,25 @@ import {
   TouchableOpacity,
   StyleSheet
 } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import {
+  createStackNavigator,
+  createAppContainer,
+  NavigationActions,
+  StackActions
+} from "react-navigation";
 import CustomStyles from "../styleconfig";
 
 export class WifiConnectSuccessScreen extends React.Component {
+  goBackHome() {
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: "SetupNeeds" })]
+    });
+
+    this.props.navigation.dispatch(resetAction);
+    this.props.navigation.navigate("Home");
+  }
+
   render() {
     return (
       <View
@@ -23,12 +38,10 @@ export class WifiConnectSuccessScreen extends React.Component {
         }}
       >
         <Text style={{ width: 250, marginBottom: 25 }}>
-          Your device is now connected. Return to the home screen by tapping the
+          Your device will now connect. Return to the home screen by tapping the
           Done button below
         </Text>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Home")}
-        >
+        <TouchableOpacity onPress={() => this.goBackHome()}>
           <Text style={styles.button}>Done</Text>
         </TouchableOpacity>
       </View>
