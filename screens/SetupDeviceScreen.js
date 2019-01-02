@@ -14,6 +14,7 @@ import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { ScanWifiScreen } from "./ScanWifiScreen";
+import { GetReadyChecklist } from "../components/GetReadyChecklist";
 
 export class SetupDeviceScreen extends React.Component {
   static navigationOptions = {
@@ -48,9 +49,10 @@ export class SetupDeviceScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ width: 250 }}>
+        <Text style={{ width: 250, marginBottom: 25 }}>
           This screen will explain device setup and create a secure claim token
         </Text>
+        <GetReadyChecklist />
         <TouchableOpacity onPress={() => this.handleReady()}>
           <Text style={styles.setupOption}>Ready</Text>
         </TouchableOpacity>
