@@ -16,6 +16,10 @@ import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { ScanWifiScreen } from "./ScanWifiScreen";
 
 export class SetupDeviceScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: "SetupDevice"
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -44,16 +48,24 @@ export class SetupDeviceScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>This screen lets us claim a new device</Text>
+        <Text style={{ width: 250 }}>
+          This screen will explain device setup and create a secure claim token
+        </Text>
         <TouchableOpacity onPress={() => this.handleReady()}>
           <Text style={styles.setupOption}>Ready</Text>
         </TouchableOpacity>
-        <Text>Our claim code: {this.state.deviceClaimCode}</Text>
+        {/* <Text style={{ marginTop: 25, width: 300 }}>
+          Our claim code: {this.state.deviceClaimCode}
+        </Text> */}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  setupOption: CustomStyles.setupOption
+  setupOption: CustomStyles.setupOption,
+  icon: {
+    width: 24,
+    height: 24
+  }
 });
