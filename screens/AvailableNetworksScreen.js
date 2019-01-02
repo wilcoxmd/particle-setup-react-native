@@ -7,7 +7,8 @@ import {
   TextInput,
   AsyncStorage,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from "react-native";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
@@ -46,10 +47,38 @@ export class AvailableNetworksScreen extends React.Component {
 
     console.log(`available passed networks ${networks[0].ssid}`);
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#F0F0F0"
+        }}
+      >
         <Text>We found some networks!</Text>
-        <Text>Select which one you'd like to connect your device to.</Text>
-        {networkList}
+        <Text style={{ marginBottom: 25 }}>
+          Select which one you'd like to connect your device to.
+        </Text>
+        <View
+          style={{
+            height: 400,
+            borderRadius: 4,
+            borderWidth: 0.5,
+            borderColor: "#d6d7da",
+            backgroundColor: "white"
+          }}
+        >
+          <ScrollView
+            contentContainerStyle={{
+              flexGrow: 0,
+              justifyContent: "space-between",
+              padding: 10,
+              backgroundColor: "white"
+            }}
+          >
+            {networkList}
+          </ScrollView>
+        </View>
         <Text style={{ marginTop: 25 }}>
           Don't see your network? Hit back and then re-scan.
         </Text>

@@ -39,7 +39,11 @@ const CustomStyles = {
     width: 250,
     marginTop: 15,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    shadowColor: "#D3D3D3",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2
   },
 
   networkOptionText: {
