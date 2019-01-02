@@ -14,16 +14,57 @@ import {
 } from "react-navigation";
 import { DrawerActions } from "react-navigation-drawer";
 import CustomStyles from "../styleconfig";
+import AppConfig from "../config";
+import ParticleWebService from "../services/ParticleWebService";
+import { Device } from "../components/Device";
 
 export class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { deviceList: [] };
+  }
+
+  async componentDidMount() {
+    try {
+      const devices = await ParticleWebService.listCustomerDevices(
+        AppConfig.testAccessToken
+      );
+      this.setState({ deviceList: devices });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>This is the home screen</Text>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#F0F0F0"
+        }}
+      >
+        <Text style={{ width: 250, marginBottom: 25 }}>
+          This is the home screen, which lists your devices.
+        </Text>
+        {this.state.deviceList.map(device => {
+          if (device.name === null) {
+            return (
+              <Device
+                deviceName="Device Name: No Name"
+                connected={device.connected}
+              />
+            );
+          } else {
+            return (
+              <Device
+                deviceName={`Device Name: ${device.name}`}
+                connected={device.connected}
+              />
+            );
+          }
+        })}
       </View>
     );
   }
