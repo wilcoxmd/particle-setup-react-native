@@ -23,8 +23,8 @@ export class WifiConnectSuccessScreen extends React.Component {
         }}
       >
         <Text style={{ width: 250, marginBottom: 25 }}>
-          Your device is now connected. Return to the home screen by tapping the
-          Done button below
+          Your device will now connected. Return to the home screen by tapping
+          the Done button below
         </Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate("Home")}
