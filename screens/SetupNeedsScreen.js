@@ -43,7 +43,7 @@ export class SetupNeedsScreen extends React.Component {
     const nextScreen = navigation.getParam("nextScreen", "screen not passed");
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ marginBottom: 25 }}>
+        <Text style={{ marginBottom: 25, width: 250 }}>
           This screen shows what we need to connect to a device
         </Text>
         <TouchableOpacity onPress={() => this.navigateToNextScreen()}>
