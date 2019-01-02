@@ -7,6 +7,7 @@ import {
   createSwitchNavigator,
   createDrawerNavigator
 } from "react-navigation";
+import { Ionicons } from "@expo/vector-icons";
 import { HomeScreen } from "./screens/HomeScreen";
 import { SignInScreen } from "./screens/SignInScreen";
 import { AccountScreen } from "./screens/AccountScreen.js";
@@ -19,26 +20,11 @@ import { AvailableNetworksScreen } from "./screens/AvailableNetworksScreen";
 import { SetPasswordScreen } from "./screens/SetPasswordScreen";
 import { WifiConnectSuccessScreen } from "./screens/WiFiConnectSuccessScreen";
 import { LogOut } from "./screens/LogOut";
+import { MenuIcon } from "./components/MenuIcon";
 
 const AuthStack = createStackNavigator({
   SignIn: SignInScreen
 });
-
-// const HomeStack = createStackNavigator({
-//   Home: HomeScreen,
-//   SetupNeeds: SetupNeedsScreen,
-//   GetId: GetIdScreen,
-//   ScanWifi: ScanWifiScreen,
-//   SetupDevice: SetupDeviceScreen,
-//   AvailableNetworks: AvailableNetworksScreen,
-//   SetPassword: SetPasswordScreen,
-//   WiFiConnectSuccess: WifiConnectSuccessScreen
-// });
-
-// const AppStack = createBottomTabNavigator({
-//   Home: HomeStack,
-//   Account: AccountScreen
-// });
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -49,7 +35,13 @@ HomeScreen.navigationOptions = function(props) {
     title: "Home",
     headerVisible: true,
     headerLeft: (
-      <Button onPress={() => props.navigation.openDrawer()} title="Menu" />
+      <View style={{ marginLeft: 20 }}>
+        <Ionicons
+          name="md-menu"
+          onPress={() => props.navigation.openDrawer()}
+          size={25}
+        />
+      </View>
     )
   };
 };
@@ -68,7 +60,13 @@ SetupDeviceScreen.navigationOptions = function(props) {
     title: "New Device Setup",
     headerVisible: true,
     headerLeft: (
-      <Button onPress={() => props.navigation.openDrawer()} title="Menu" />
+      <View style={{ marginLeft: 20 }}>
+        <Ionicons
+          name="md-menu"
+          onPress={() => props.navigation.openDrawer()}
+          size={25}
+        />
+      </View>
     )
   };
 };
@@ -87,7 +85,13 @@ SetupNeedsScreen.navigationOptions = function(props) {
     title: "How to Connect",
     headerVisible: true,
     headerLeft: (
-      <Button onPress={() => props.navigation.openDrawer()} title="Menu" />
+      <View style={{ marginLeft: 20 }}>
+        <Ionicons
+          name="md-menu"
+          onPress={() => props.navigation.openDrawer()}
+          size={25}
+        />
+      </View>
     )
   };
 };
