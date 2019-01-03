@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { MenuIcon } from "../components/MenuIcon";
 import { DeviceList } from "../components/DeviceList";
+import CustomStyles from "../styleconfig";
 
 export class HomeScreen extends React.Component {
   static navigationOptions = function(props) {
@@ -27,25 +28,7 @@ export class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "stretch",
-    backgroundColor: "#F0F0F0"
-  },
-  bigHeaderContainer: {
-    height: 150,
-    justifyContent: "center",
-    padding: 10,
-    backgroundColor: "white",
-    borderBottomColor: "#A9A9A9",
-    borderBottomWidth: 1
-  },
-  bigHeader: {
-    fontSize: 24,
-    fontWeight: "500",
-    textTransform: "uppercase",
-    color: "#303030"
-  }
+  screenContainer: CustomStyles.screenContainer,
+  bigHeaderContainer: CustomStyles.bigHeaderContainer,
+  bigHeader: CustomStyles.bigHeader
 });

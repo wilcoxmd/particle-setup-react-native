@@ -49,6 +49,33 @@ const CustomStyles = {
   networkOptionText: {
     color: "white",
     fontWeight: "bold"
+  },
+
+  screenContainer: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "stretch",
+    backgroundColor: "#F0F0F0"
+  },
+  bigHeaderContainer: {
+    height: 150,
+    justifyContent: "center",
+    padding: 10,
+    backgroundColor: "white",
+    borderBottomColor: "#A9A9A9",
+    borderBottomWidth: 1
+  },
+  bigHeader: {
+    fontSize: 24,
+    fontWeight: "500",
+    textTransform: "uppercase",
+    color: "#303030"
+  },
+  subHeader: {
+    marginTop: 5,
+    fontSize: 14,
+    color: "#303030"
   }
 };
 
