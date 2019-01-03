@@ -15,7 +15,7 @@ import AppConfig from "../config";
 import { GetIdScreen } from "./GetIdScreen";
 import { ScanWifiScreen } from "./ScanWifiScreen";
 import { GetReadyChecklist } from "../components/GetReadyChecklist";
-import { Ionicons } from "@expo/vector-icons";
+import { MenuIcon } from "../components/MenuIcon";
 
 export class SetupNeedsScreen extends React.Component {
   static navigationOptions = function(props) {
@@ -23,13 +23,7 @@ export class SetupNeedsScreen extends React.Component {
       title: "How to Connect",
       headerVisible: true,
       headerLeft: (
-        <View style={{ marginLeft: 20 }}>
-          <Ionicons
-            name="md-menu"
-            onPress={() => props.navigation.openDrawer()}
-            size={24}
-          />
-        </View>
+        <MenuIcon handlePress={() => props.navigation.openDrawer.bind(this)} />
       )
     };
   };

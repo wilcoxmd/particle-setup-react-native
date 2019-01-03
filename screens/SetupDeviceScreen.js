@@ -15,7 +15,7 @@ import AppConfig from "../config";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { ScanWifiScreen } from "./ScanWifiScreen";
 import { GetReadyChecklist } from "../components/GetReadyChecklist";
-import { Ionicons } from "@expo/vector-icons";
+import { MenuIcon } from "../components/MenuIcon";
 
 export class SetupDeviceScreen extends React.Component {
   static navigationOptions = function(props) {
@@ -23,13 +23,7 @@ export class SetupDeviceScreen extends React.Component {
       title: "New Device Setup",
       headerVisible: true,
       headerLeft: (
-        <View style={{ marginLeft: 20 }}>
-          <Ionicons
-            name="md-menu"
-            onPress={() => props.navigation.openDrawer()}
-            size={24}
-          />
-        </View>
+        <MenuIcon handlePress={() => props.navigation.openDrawer.bind(this)} />
       )
     };
   };

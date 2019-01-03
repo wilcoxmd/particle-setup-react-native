@@ -17,7 +17,7 @@ import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
 import ParticleWebService from "../services/ParticleWebService";
 import { Device } from "../components/Device";
-import { Ionicons } from "@expo/vector-icons";
+import { MenuIcon } from "../components/MenuIcon";
 
 export class HomeScreen extends React.Component {
   constructor(props) {
@@ -30,13 +30,7 @@ export class HomeScreen extends React.Component {
       title: "Home",
       headerVisible: true,
       headerLeft: (
-        <View style={{ marginLeft: 20 }}>
-          <Ionicons
-            name="md-menu"
-            onPress={() => props.navigation.openDrawer()}
-            size={24}
-          />
-        </View>
+        <MenuIcon handlePress={() => props.navigation.openDrawer.bind(this)} />
       )
     };
   };
