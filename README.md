@@ -1,4 +1,4 @@
-# Particle Setup - React Navtive
+# Particle Setup - React Native
 
 An exploratory project for creating basic [Particle](https://www.particle.io) setup applications with react native.
 
