@@ -22,8 +22,8 @@ export class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.screenContainer}>
-        <View style={styles.bigHeader}>
-          <Text>This is the home screen, which lists your devices.</Text>
+        <View style={styles.bigHeaderContainer}>
+          <Text style={styles.bigHeader}>Your Devices</Text>
         </View>
         <DeviceList />
       </View>
@@ -39,9 +39,16 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     backgroundColor: "#F0F0F0"
   },
-  bigHeader: {
+  bigHeaderContainer: {
     height: 150,
     justifyContent: "center",
-    padding: 10
+    padding: 10,
+    backgroundColor: "white"
+  },
+  bigHeader: {
+    fontSize: 24,
+    fontWeight: "500",
+    textTransform: "uppercase",
+    color: "#303030"
   }
 });

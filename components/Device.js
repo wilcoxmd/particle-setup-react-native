@@ -2,10 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 export class Device extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <TouchableOpacity style={styles.deviceContainer}>
