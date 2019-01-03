@@ -7,10 +7,8 @@ import {
   createSwitchNavigator,
   createDrawerNavigator
 } from "react-navigation";
-import { Ionicons } from "@expo/vector-icons";
 import { HomeScreen } from "./screens/HomeScreen";
 import { SignInScreen } from "./screens/SignInScreen";
-import { AccountScreen } from "./screens/AccountScreen.js";
 import { AuthLoadingScreen } from "./screens/AuthLoadingScreen";
 import { GetIdScreen } from "./screens/GetIdScreen";
 import { SetupNeedsScreen } from "./screens/SetupNeedsScreen";
@@ -20,7 +18,6 @@ import { AvailableNetworksScreen } from "./screens/AvailableNetworksScreen";
 import { SetPasswordScreen } from "./screens/SetPasswordScreen";
 import { WifiConnectSuccessScreen } from "./screens/WiFiConnectSuccessScreen";
 import { LogOut } from "./screens/LogOut";
-import { MenuIcon } from "./components/MenuIcon";
 
 const AuthStack = createStackNavigator({
   SignIn: SignInScreen
@@ -29,22 +26,6 @@ const AuthStack = createStackNavigator({
 const HomeStack = createStackNavigator({
   Home: HomeScreen
 });
-
-HomeScreen.navigationOptions = function(props) {
-  return {
-    title: "Home",
-    headerVisible: true,
-    headerLeft: (
-      <View style={{ marginLeft: 20 }}>
-        <Ionicons
-          name="md-menu"
-          onPress={() => props.navigation.openDrawer()}
-          size={25}
-        />
-      </View>
-    )
-  };
-};
 
 const SetupStack = createStackNavigator({
   SetupDevice: SetupDeviceScreen,
@@ -55,22 +36,6 @@ SetupStack.navigationOptions = {
   drawerLabel: "Setup New Device"
 };
 
-SetupDeviceScreen.navigationOptions = function(props) {
-  return {
-    title: "New Device Setup",
-    headerVisible: true,
-    headerLeft: (
-      <View style={{ marginLeft: 20 }}>
-        <Ionicons
-          name="md-menu"
-          onPress={() => props.navigation.openDrawer()}
-          size={25}
-        />
-      </View>
-    )
-  };
-};
-
 const GetIDStack = createStackNavigator({
   SetupNeeds: SetupNeedsScreen,
   GetID: GetIdScreen
@@ -78,22 +43,6 @@ const GetIDStack = createStackNavigator({
 
 GetIDStack.navigationOptions = {
   drawerLabel: "Get Device ID"
-};
-
-SetupNeedsScreen.navigationOptions = function(props) {
-  return {
-    title: "How to Connect",
-    headerVisible: true,
-    headerLeft: (
-      <View style={{ marginLeft: 20 }}>
-        <Ionicons
-          name="md-menu"
-          onPress={() => props.navigation.openDrawer()}
-          size={25}
-        />
-      </View>
-    )
-  };
 };
 
 const ConfigureWifiStack = createStackNavigator({

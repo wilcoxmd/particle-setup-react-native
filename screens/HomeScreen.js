@@ -17,12 +17,29 @@ import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
 import ParticleWebService from "../services/ParticleWebService";
 import { Device } from "../components/Device";
+import { Ionicons } from "@expo/vector-icons";
 
 export class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { deviceList: [] };
   }
+
+  static navigationOptions = function(props) {
+    return {
+      title: "Home",
+      headerVisible: true,
+      headerLeft: (
+        <View style={{ marginLeft: 20 }}>
+          <Ionicons
+            name="md-menu"
+            onPress={() => props.navigation.openDrawer()}
+            size={24}
+          />
+        </View>
+      )
+    };
+  };
 
   async componentDidMount() {
     try {

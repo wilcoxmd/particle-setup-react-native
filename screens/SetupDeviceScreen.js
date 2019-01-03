@@ -15,10 +15,23 @@ import AppConfig from "../config";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { ScanWifiScreen } from "./ScanWifiScreen";
 import { GetReadyChecklist } from "../components/GetReadyChecklist";
+import { Ionicons } from "@expo/vector-icons";
 
 export class SetupDeviceScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: "SetupDevice"
+  static navigationOptions = function(props) {
+    return {
+      title: "New Device Setup",
+      headerVisible: true,
+      headerLeft: (
+        <View style={{ marginLeft: 20 }}>
+          <Ionicons
+            name="md-menu"
+            onPress={() => props.navigation.openDrawer()}
+            size={24}
+          />
+        </View>
+      )
+    };
   };
 
   constructor(props) {
