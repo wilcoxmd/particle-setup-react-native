@@ -28,7 +28,7 @@ export class DeviceList extends React.Component {
       if (devices === undefined) {
         this.setState({
           message:
-            "Could not load devices. Make sure you're connected to the network, then pull to refresh."
+            "Could not load devices. \nMake sure you're connected to the network, then pull to refresh."
         });
       } else {
         this.setState({ deviceList: devices });
@@ -38,8 +38,16 @@ export class DeviceList extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    try {
+      await this.pullDeviceData();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async refreshDeviceList() {
-    this.setState({ refreshing: true });
+    this.setState({ refreshing: true, message: "" });
     try {
       await this.pullDeviceData();
       this.setState({ refreshing: false });
@@ -48,40 +56,38 @@ export class DeviceList extends React.Component {
     }
   }
 
-  async componentDidMount() {
-    try {
-      await this.refreshDeviceList();
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  render() {
+  showContent() {
     if (this.state.deviceList.length >= 1) {
       return (
-        <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this.refreshDeviceList.bind(this)}
-              title="Refreshing..."
-            />
-          }
-        >
-          <View style={styles.deviceList}>
-            {this.state.deviceList.map((device, index) => {
-              return <Device device={device} key={index} />;
-            })}
-          </View>
-        </ScrollView>
+        <View style={styles.deviceList}>
+          {this.state.deviceList.map((device, index) => {
+            return <Device device={device} key={index} />;
+          })}
+        </View>
       );
     } else {
       return (
-        <View style={styles.deviceList}>
+        <View style={styles.listMsg}>
           <Text>{this.state.message}</Text>
         </View>
       );
     }
+  }
+
+  render() {
+    return (
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.refreshDeviceList.bind(this)}
+            title="Refreshing..."
+          />
+        }
+      >
+        {this.showContent()}
+      </ScrollView>
+    );
   }
 }
 
@@ -91,5 +97,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "stretch",
     padding: 10
+  },
+  listMsg: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 40
   }
 });
