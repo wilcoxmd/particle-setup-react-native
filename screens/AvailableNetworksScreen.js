@@ -56,8 +56,9 @@ export class AvailableNetworksScreen extends React.Component {
         }}
       >
         <Text>We found some networks!</Text>
-        <Text style={{ marginBottom: 25 }}>
-          Select which one you'd like to connect your device to.
+        <Text>Select which one you'd like to connect your device to.</Text>
+        <Text style={{ marginTop: 25, marginBottom: 25 }}>
+          Don't see your network? Hit back and then re-scan.
         </Text>
         <View
           style={{
@@ -79,9 +80,6 @@ export class AvailableNetworksScreen extends React.Component {
             {networkList}
           </ScrollView>
         </View>
-        <Text style={{ marginTop: 25 }}>
-          Don't see your network? Hit back and then re-scan.
-        </Text>
       </View>
     );
   }

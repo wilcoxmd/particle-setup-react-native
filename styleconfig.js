@@ -36,7 +36,7 @@ const CustomStyles = {
     fontWeight: "bold",
     textAlign: "center",
     color: "white",
-    width: 250,
+    width: 300,
     marginTop: 15,
     justifyContent: "center",
     alignItems: "center",
