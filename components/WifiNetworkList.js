@@ -9,7 +9,7 @@ export class WifiNetworkList extends React.Component {
         {this.props.networks.map((network, index) => {
           return (
             <WifiNetwork
-              selctionHandler={this.props.selctionHandler.bind(this)}
+              selectionHandler={this.props.pressHandler}
               network={network}
               key={index}
             />

@@ -6,7 +6,7 @@ export class WifiNetwork extends React.Component {
     return (
       <TouchableOpacity
         style={styles.networkContainer}
-        onPress={this.props.selctionHandler()}
+        onPress={() => this.props.selectionHandler(this.props.network)}
       >
         <View style={styles.textContainer}>
           <Text style={styles.primaryText}>{this.props.network.ssid}</Text>
