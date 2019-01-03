@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import {
   createStackNavigator,
   createAppContainer,
@@ -25,7 +25,9 @@ export class HomeScreen extends React.Component {
         <View style={styles.bigHeaderContainer}>
           <Text style={styles.bigHeader}>Your Devices</Text>
         </View>
-        <DeviceList />
+        <ScrollView>
+          <DeviceList />
+        </ScrollView>
       </View>
     );
   }
@@ -43,7 +45,9 @@ const styles = StyleSheet.create({
     height: 150,
     justifyContent: "center",
     padding: 10,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    borderBottomColor: "#A9A9A9",
+    borderBottomWidth: 1
   },
   bigHeader: {
     fontSize: 24,
