@@ -9,10 +9,14 @@ export class Device extends React.Component {
   render() {
     return (
       <TouchableOpacity style={styles.deviceContainer}>
-        <Text style={styles.primaryText}>
-          {this.props.device.name ? this.props.device.name : "Unnamed Device"}
-        </Text>
-        <Text>{this.props.device.connected ? "Online" : "Offline"}</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.primaryText}>
+            {this.props.device.name ? this.props.device.name : "Unnamed Device"}
+          </Text>
+          <Text style={styles.secondaryText}>
+            {this.props.device.connected ? "Online" : "Offline"}
+          </Text>
+        </View>
       </TouchableOpacity>
     );
   }
@@ -20,18 +24,26 @@ export class Device extends React.Component {
 
 const styles = StyleSheet.create({
   deviceContainer: {
-    height: 72,
+    height: 64,
     backgroundColor: "white",
     marginBottom: 10,
-    // width: 250,
-    padding: 5,
     shadowColor: "#D3D3D3",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2
   },
-  primaryText: {
-    marginBottom: 5
+  textContainer: {
+    marginLeft: 16
   },
-  secondaryText: {}
+  primaryText: {
+    marginTop: 14,
+    fontSize: 14
+  },
+  secondaryText: {
+    marginBottom: 5,
+    fontSize: 12,
+    fontWeight: "100",
+    marginTop: 3,
+    color: "#303030"
+  }
 });
