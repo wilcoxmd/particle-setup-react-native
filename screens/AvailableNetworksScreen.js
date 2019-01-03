@@ -21,7 +21,7 @@ export class AvailableNetworksScreen extends React.Component {
         <View style={styles.bigHeaderContainer}>
           <Text style={styles.bigHeader}>Available Networks</Text>
           <Text style={styles.subHeader}>
-            Select a network you'd like to connect your device to
+            Select the network you want to connect your device to
           </Text>
         </View>
         <ScrollView>
