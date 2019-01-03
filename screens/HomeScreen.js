@@ -1,10 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import {
-  createStackNavigator,
-  createAppContainer,
-  NavigationActions
-} from "react-navigation";
+import { View, Text, StyleSheet } from "react-native";
 import { MenuIcon } from "../components/MenuIcon";
 import { DeviceList } from "../components/DeviceList";
 
@@ -25,9 +20,7 @@ export class HomeScreen extends React.Component {
         <View style={styles.bigHeaderContainer}>
           <Text style={styles.bigHeader}>Your Devices</Text>
         </View>
-        <ScrollView>
-          <DeviceList />
-        </ScrollView>
+        <DeviceList />
       </View>
     );
   }
