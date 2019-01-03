@@ -4,7 +4,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 export class WifiNetwork extends React.Component {
   render() {
     return (
-      <TouchableOpacity style={styles.networkContainer}>
+      <TouchableOpacity
+        style={styles.networkContainer}
+        onPress={this.props.selctionHandler()}
+      >
         <View style={styles.textContainer}>
           <Text style={styles.primaryText}>{this.props.network.ssid}</Text>
           <Text style={styles.secondaryText}>

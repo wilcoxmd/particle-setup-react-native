@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { WifiNetworkList } from "../components/WifiNetworkList";
 
 export class AvailableNetworksScreen extends React.Component {
-  onPressHandler(selectedNetwork) {
+  selctionHandler(selectedNetwork) {
     const { navigation } = this.props;
     const deviceClaimCode = navigation.getParam("deviceClaimCode", null);
     this.props.navigation.navigate("SetPassword", {
@@ -25,7 +25,10 @@ export class AvailableNetworksScreen extends React.Component {
           </Text>
         </View>
         <ScrollView>
-          <WifiNetworkList networks={networks} />
+          <WifiNetworkList
+            selctionHandler={() => this.selctionHandler.bind(this)}
+            networks={networks}
+          />
         </ScrollView>
       </View>
     );

@@ -7,7 +7,13 @@ export class WifiNetworkList extends React.Component {
     return (
       <View style={styles.wifiList}>
         {this.props.networks.map((network, index) => {
-          return <WifiNetwork network={network} key={index} />;
+          return (
+            <WifiNetwork
+              selctionHandler={this.props.selctionHandler.bind(this)}
+              network={network}
+              key={index}
+            />
+          );
         })}
       </View>
     );
