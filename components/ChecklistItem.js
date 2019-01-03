@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Button
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { ChecklistBubble } from "./ChecklistBubble";
 
 export class ChecklistItem extends React.Component {
@@ -16,20 +9,22 @@ export class ChecklistItem extends React.Component {
 
   render() {
     return (
-      <View style={{ width: 250 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignContent: "flex-start",
-            marginBottom: 25
-          }}
-        >
-          <ChecklistBubble itemNumber={this.props.itemNumber} />
-          <Text style={{ lineHeight: 25, marginLeft: 15 }}>
-            {this.props.itemText}
-          </Text>
-        </View>
+      <View style={styles.checklistItem}>
+        <ChecklistBubble itemNumber={this.props.itemNumber} />
+        <Text style={styles.itemText}>{this.props.itemText}</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  checklistItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    height: 88,
+    backgroundColor: "#F0F0F0"
+  },
+  itemText: {
+    marginLeft: 10
+  }
+});

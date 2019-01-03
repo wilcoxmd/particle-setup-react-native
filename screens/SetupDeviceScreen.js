@@ -55,26 +55,28 @@ export class SetupDeviceScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ width: 250, marginBottom: 25 }}>
-          This screen will explain device setup and create a secure claim token
-        </Text>
+      <View style={styles.screenContainer}>
+        <View style={styles.bigHeaderContainer}>
+          <Text style={styles.bigHeader}>Get Ready</Text>
+        </View>
         <GetReadyChecklist />
-        <TouchableOpacity onPress={() => this.handleReady()}>
-          <Text style={styles.setupOption}>Ready</Text>
+        <TouchableOpacity
+          style={styles.readyButtonContainer}
+          onPress={() => this.handleReady()}
+        >
+          <Text style={styles.button}>Ready</Text>
         </TouchableOpacity>
-        {/* <Text style={{ marginTop: 25, width: 300 }}>
-          Our claim code: {this.state.deviceClaimCode}
-        </Text> */}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  setupOption: CustomStyles.setupOption,
-  icon: {
-    width: 24,
-    height: 24
+const styles = {
+  button: CustomStyles.buttonStyles,
+  screenContainer: CustomStyles.screenContainer,
+  bigHeaderContainer: CustomStyles.bigHeaderContainer,
+  bigHeader: CustomStyles.bigHeader,
+  readyButtonContainer: {
+    alignItems: "center"
   }
-});
+};

@@ -1,38 +1,28 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Button
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 export class ChecklistBubble extends React.Component {
   render() {
     return (
-      <View
-        style={{
-          flexDirection: "row",
-          alignContent: "center",
-          width: 25,
-          height: 25,
-          borderRadius: 13,
-          backgroundColor: "#304156"
-        }}
-      >
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          <Text style={{ color: "white", fontWeight: "500" }}>
-            {this.props.itemNumber}
-          </Text>
-        </View>
+      <View style={styles.bubbleContainer}>
+        <Text style={styles.bubbleText}>{this.props.itemNumber}</Text>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  bubbleContainer: {
+    height: 25,
+    width: 25,
+    borderRadius: 12,
+    backgroundColor: "#808080",
+    alignItems: "center"
+  },
+  bubbleText: {
+    color: "white",
+    fontWeight: "500",
+    lineHeight: 25,
+    fontSize: 14
+  }
+});

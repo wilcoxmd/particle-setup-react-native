@@ -20,7 +20,7 @@ import { MenuIcon } from "../components/MenuIcon";
 export class SetupNeedsScreen extends React.Component {
   static navigationOptions = function(props) {
     return {
-      title: "How to Connect",
+      title: "Connect to Device",
       headerVisible: true,
       headerLeft: (
         <MenuIcon handlePress={() => props.navigation.openDrawer.bind(this)} />
@@ -51,12 +51,16 @@ export class SetupNeedsScreen extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
-    const nextScreen = navigation.getParam("nextScreen", "screen not passed");
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={styles.screenContainer}>
+        <View style={styles.bigHeaderContainer}>
+          <Text style={styles.bigHeader}>Get Ready</Text>
+        </View>
         <GetReadyChecklist />
-        <TouchableOpacity onPress={() => this.navigateToNextScreen()}>
+        <TouchableOpacity
+          style={styles.readyButtonContainer}
+          onPress={() => this.navigateToNextScreen()}
+        >
           <Text style={styles.button}>Ready</Text>
         </TouchableOpacity>
       </View>
@@ -65,5 +69,11 @@ export class SetupNeedsScreen extends React.Component {
 }
 
 const styles = {
-  button: CustomStyles.buttonStyles
+  button: CustomStyles.buttonStyles,
+  screenContainer: CustomStyles.screenContainer,
+  bigHeaderContainer: CustomStyles.bigHeaderContainer,
+  bigHeader: CustomStyles.bigHeader,
+  readyButtonContainer: {
+    alignItems: "center"
+  }
 };
