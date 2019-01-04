@@ -1,4 +1,0 @@
-#Fri Jan 04 15:14:08 CST 2019
-base.0=/Users/mattwilcox/Documents/lunaDev/particle-setup-react-native/android/app/build/intermediates/transforms/dexMerger/devMinSdkDevKernel/debug/8
-path.0=classes.dex
-renamed.0=classes.dex
