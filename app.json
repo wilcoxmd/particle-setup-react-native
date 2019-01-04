@@ -18,7 +18,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.mattdwilcox.particlesetupreactnative"
+    },
+    "android": {
+      "package": "com.mattdwilcox.particlesetupreactnative"
     }
   }
 }
