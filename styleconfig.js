@@ -2,7 +2,6 @@ const CustomStyles = {
   buttonStyles: {
     backgroundColor: "#e4b523",
     padding: 15,
-    borderRadius: 15,
     fontWeight: "bold",
     textAlign: "center",
     color: "white",
