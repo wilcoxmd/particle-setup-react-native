@@ -9,3 +9,4 @@ config.js
 *.example.js
 .vscode/
 ios/Pods/**/*
+ios/particle-setup-react-native.xcworkspace/xcuserdata/
