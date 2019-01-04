@@ -8,3 +8,4 @@ npm-debug.*
 config.js
 *.example.js
 .vscode/
+ios/Pods/**/*
