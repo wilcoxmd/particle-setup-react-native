@@ -3,8 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import CustomStyles from "../styleconfig";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { WifiInstructions } from "../components/WifiInstructions";
-import ParticleWebService from "../services/ParticleWebService";
-import AppConfig from "../config";
 
 export class GetIdScreen extends React.Component {
   constructor(props) {
@@ -57,10 +55,6 @@ export class GetIdScreen extends React.Component {
         >
           <Text style={styles.button}>Get Info</Text>
         </TouchableOpacity>
-        <Text style={{ marginBottom: 10, marginTop: 25 }}>
-          {deviceIdString}
-        </Text>
-        <Text>{reconnectionString}</Text>
       </View>
     );
   }
