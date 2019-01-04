@@ -1,17 +1,6 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  TextInput,
-  AsyncStorage,
-  TouchableOpacity,
-  StyleSheet
-} from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import CustomStyles from "../styleconfig";
-import AppConfig from "../config";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { WifiInstructions } from "../components/WifiInstructions";
 
@@ -28,11 +17,10 @@ export class ScanWifiScreen extends React.Component {
     const deviceClaimCode = navigation.getParam("deviceClaimCode", null);
     this.setState({ buttonText: "Scanning..." });
     try {
-      console.log("starting scan...");
       const availableNetworks = await ParticleDeviceSetup.scanAP();
-      console.log(`available networks: ${availableNetworks}`);
+
       this.setState({ buttonText: "Re-Scan Networks" });
-      console.log("navigating");
+
       this.props.navigation.navigate("AvailableNetworks", {
         networks: availableNetworks,
         deviceClaimCode: deviceClaimCode
@@ -45,15 +33,21 @@ export class ScanWifiScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ marginBottom: 10 }}>This screen lets us scan wifi</Text>
+      <View style={styles.screenContainer}>
+        <View style={styles.bigHeaderContainer}>
+          <Text style={styles.bigHeader}>Scan Networks</Text>
+          <Text style={styles.subHeader}>
+            Follow the instructions below to connect your device
+          </Text>
+        </View>
         <WifiInstructions />
         <TouchableOpacity
+          style={styles.readyButtonContainer}
           onPress={async () => {
             this.scanNetworks();
           }}
         >
-          <Text style={style.button}>{this.state.buttonText}</Text>
+          <Text style={styles.button}>{this.state.buttonText}</Text>
         </TouchableOpacity>
         {this.props.deviceClaimCode ? (
           <Text>{this.props.deviceClaimCode}</Text>
@@ -63,6 +57,13 @@ export class ScanWifiScreen extends React.Component {
   }
 }
 
-const style = {
-  button: CustomStyles.buttonStyles
-};
+const styles = StyleSheet.create({
+  button: CustomStyles.buttonStyles,
+  screenContainer: CustomStyles.screenContainer,
+  bigHeaderContainer: CustomStyles.bigHeaderContainer,
+  bigHeader: CustomStyles.bigHeader,
+  subHeader: CustomStyles.subHeader,
+  readyButtonContainer: {
+    alignItems: "center"
+  }
+});

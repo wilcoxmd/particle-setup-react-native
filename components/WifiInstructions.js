@@ -14,7 +14,7 @@ import { ChecklistItem } from "./ChecklistItem";
 export class WifiInstructions extends React.Component {
   render() {
     return (
-      <View>
+      <View style={styles.getReadyList}>
         <ChecklistItem itemNumber="1" itemText="Tap Home > Settings > Wi-Fi" />
         <ChecklistItem
           itemNumber="2"
@@ -28,3 +28,10 @@ export class WifiInstructions extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  getReadyList: {
+    flexDirection: "column",
+    padding: 20
+  }
+});
