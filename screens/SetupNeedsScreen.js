@@ -18,19 +18,39 @@ import { GetReadyChecklist } from "../components/GetReadyChecklist";
 import { MenuIcon } from "../components/MenuIcon";
 
 export class SetupNeedsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      headerTitle: "Connect to Device"
+    };
+  }
+
+  componentDidMount() {
+    const routeName = this.props.navigation.dangerouslyGetParent().state.key;
+    let headerTitle;
+    switch (routeName) {
+      case "GetID":
+        headerTitle = "Get Device ID";
+        break;
+      case "ConfigureWifi":
+        headerTitle = "Configure Wi-Fi";
+        break;
+      default:
+        headerTitle = "Connect to Device";
+        break;
+    }
+    this.props.navigation.setParams({ headerTitle: headerTitle });
+  }
+
   static navigationOptions = function(props) {
     return {
-      title: "Connect to Device",
+      title: props.navigation.getParam("headerTitle", "Connect to Device"),
       headerVisible: true,
       headerLeft: (
         <MenuIcon handlePress={() => props.navigation.openDrawer.bind(this)} />
       )
     };
   };
-
-  constructor(props) {
-    super(props);
-  }
 
   navigateToNextScreen() {
     const routeName = this.props.navigation.dangerouslyGetParent().state.key;
@@ -44,6 +64,7 @@ export class SetupNeedsScreen extends React.Component {
         nextScreen = "ScanWifi";
         break;
       default:
+        nextScreen = "ErrorScreen";
         break;
     }
     console.log(`navigating to ${nextScreen}`);
