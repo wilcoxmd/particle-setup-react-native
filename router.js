@@ -1,9 +1,6 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
 import {
   createStackNavigator,
   createAppContainer,
-  createBottomTabNavigator,
   createSwitchNavigator,
   createDrawerNavigator
 } from "react-navigation";
@@ -17,6 +14,7 @@ import { SetupDeviceScreen } from "./screens/SetupDeviceScreen";
 import { AvailableNetworksScreen } from "./screens/AvailableNetworksScreen";
 import { SetPasswordScreen } from "./screens/SetPasswordScreen";
 import { WifiConnectSuccessScreen } from "./screens/WiFiConnectSuccessScreen";
+import { DeviceControlScreen } from "./screens/DeviceControlScreen";
 import { LogOut } from "./screens/LogOut";
 
 const AuthStack = createStackNavigator({
@@ -24,7 +22,8 @@ const AuthStack = createStackNavigator({
 });
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen
+  Home: HomeScreen,
+  DeviceControl: DeviceControlScreen
 });
 
 const SetupStack = createStackNavigator({
@@ -38,7 +37,8 @@ SetupStack.navigationOptions = {
 
 const GetIDStack = createStackNavigator({
   SetupNeeds: SetupNeedsScreen,
-  GetID: GetIdScreen
+  GetID: GetIdScreen,
+  DeviceControl: DeviceControlScreen
 });
 
 GetIDStack.navigationOptions = {

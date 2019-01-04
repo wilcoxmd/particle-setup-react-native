@@ -5,6 +5,10 @@ import { DeviceList } from "../components/DeviceList";
 import CustomStyles from "../styleconfig";
 
 export class HomeScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.goToDevice = this.goToDevice.bind(this);
+  }
   static navigationOptions = function(props) {
     return {
       title: "Home",
@@ -15,13 +19,17 @@ export class HomeScreen extends React.Component {
     };
   };
 
+  goToDevice(deviceId) {
+    this.props.navigation.navigate("DeviceControl", { deviceId: deviceId });
+  }
+
   render() {
     return (
       <View style={styles.screenContainer}>
         <View style={styles.bigHeaderContainer}>
           <Text style={styles.bigHeader}>Your Devices</Text>
         </View>
-        <DeviceList />
+        <DeviceList handleSelection={this.goToDevice} />
       </View>
     );
   }

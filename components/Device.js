@@ -4,7 +4,10 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 export class Device extends React.Component {
   render() {
     return (
-      <TouchableOpacity style={styles.deviceContainer}>
+      <TouchableOpacity
+        style={styles.deviceContainer}
+        onPress={() => this.props.handlePress(this.props.device.id)}
+      >
         <View style={styles.textContainer}>
           <Text style={styles.primaryText}>
             {this.props.device.name ? this.props.device.name : "Unnamed Device"}

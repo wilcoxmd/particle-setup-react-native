@@ -61,7 +61,13 @@ export class DeviceList extends React.Component {
       return (
         <View style={styles.deviceList}>
           {this.state.deviceList.map((device, index) => {
-            return <Device device={device} key={index} />;
+            return (
+              <Device
+                device={device}
+                key={index}
+                handlePress={this.props.handleSelection}
+              />
+            );
           })}
         </View>
       );

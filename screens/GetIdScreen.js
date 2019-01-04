@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import CustomStyles from "../styleconfig";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
 import { WifiInstructions } from "../components/WifiInstructions";
+import ParticleWebService from "../services/ParticleWebService";
+import AppConfig from "../config";
 
 export class GetIdScreen extends React.Component {
   constructor(props) {
@@ -14,13 +16,19 @@ export class GetIdScreen extends React.Component {
   }
 
   async handlePress() {
-    console.log("handle press fired.");
-    const deviceid = await ParticleDeviceSetup.fetchDeviceId();
-    console.log(`device id: ${deviceid}`);
-    this.setState({
-      deviceIdNumber: deviceid,
-      deviceConnected: true
-    });
+    try {
+      console.log("handle press fired.");
+      const deviceId = await ParticleDeviceSetup.fetchDeviceId();
+      console.log(`device id: ${deviceId}`);
+      this.setState({
+        deviceIdNumber: deviceId,
+        deviceConnected: true
+      });
+      await ParticleDeviceSetup.connectToNetwork();
+      this.props.navigation.navigate("DeviceControl", { deviceId: deviceId });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
