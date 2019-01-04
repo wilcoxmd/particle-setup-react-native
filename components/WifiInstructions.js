@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  TextInput,
-  AsyncStorage,
-  TouchableOpacity,
-  StyleSheet
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import { ChecklistItem } from "./ChecklistItem";
 
 export class WifiInstructions extends React.Component {
@@ -22,7 +13,9 @@ export class WifiInstructions extends React.Component {
         />
         <ChecklistItem
           itemNumber="3"
-          itemText="Once connected, return to this app and tap the 'Scan Networks' button"
+          itemText={`Once connected, return to this app and tap the '${
+            this.props.buttonName
+          }' button`}
         />
       </View>
     );

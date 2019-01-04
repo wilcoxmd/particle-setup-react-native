@@ -1,18 +1,8 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  TextInput,
-  AsyncStorage,
-  TouchableOpacity,
-  StyleSheet
-} from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import CustomStyles from "../styleconfig";
-import AppConfig from "../config";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
+import { WifiInstructions } from "../components/WifiInstructions";
 
 export class GetIdScreen extends React.Component {
   constructor(props) {
@@ -45,12 +35,19 @@ export class GetIdScreen extends React.Component {
     }
 
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ marginBottom: 25 }}>
-          This screen lets us get a device ID.
-        </Text>
-        <TouchableOpacity onPress={async () => this.handlePress()}>
-          <Text style={style.button}>Get ID!</Text>
+      <View style={styles.screenContainer}>
+        <View style={styles.bigHeaderContainer}>
+          <Text style={styles.bigHeader}>Connect to Device</Text>
+          <Text style={styles.subHeader}>
+            Retrieve info from a your local device
+          </Text>
+        </View>
+        <WifiInstructions buttonName="Get Info" />
+        <TouchableOpacity
+          style={styles.getIdButtonContainer}
+          onPress={async () => this.handlePress()}
+        >
+          <Text style={styles.button}>Get Info</Text>
         </TouchableOpacity>
         <Text style={{ marginBottom: 10, marginTop: 25 }}>
           {deviceIdString}
@@ -61,6 +58,13 @@ export class GetIdScreen extends React.Component {
   }
 }
 
-const style = {
-  button: CustomStyles.buttonStyles
-};
+const styles = StyleSheet.create({
+  button: CustomStyles.buttonStyles,
+  screenContainer: CustomStyles.screenContainer,
+  bigHeaderContainer: CustomStyles.bigHeaderContainer,
+  bigHeader: CustomStyles.bigHeader,
+  subHeader: CustomStyles.subHeader,
+  getIdButtonContainer: {
+    alignItems: "center"
+  }
+});

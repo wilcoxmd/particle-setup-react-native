@@ -40,7 +40,7 @@ export class ScanWifiScreen extends React.Component {
             Follow the instructions below to connect your device
           </Text>
         </View>
-        <WifiInstructions />
+        <WifiInstructions buttonName="Scan Networks" />
         <TouchableOpacity
           style={styles.readyButtonContainer}
           onPress={async () => {
