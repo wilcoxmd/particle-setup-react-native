@@ -44,12 +44,18 @@ export class DeviceControlScreen extends React.Component {
 
   render() {
     const device = this.state.deviceInfo;
+    let deviceName;
+    if (device != null && device.name === null) {
+      deviceName = "Unnamed Device";
+    } else if (device != null && device.name) {
+      deviceName = device.name;
+    }
 
     return (
       <View style={styles.screenContainer}>
         <View style={styles.bigHeaderContainer}>
           <Text style={styles.bigHeader}>
-            {device != null ? this.state.deviceInfo.name : "Loading Name..."}
+            {device ? deviceName : "Loading Name..."}
           </Text>
           <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
