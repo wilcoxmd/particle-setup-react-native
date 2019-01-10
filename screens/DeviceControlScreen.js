@@ -8,7 +8,8 @@ export class DeviceControlScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      deviceId: null
+      deviceId: null,
+      deviceInfo: null
     };
   }
 
@@ -17,32 +18,55 @@ export class DeviceControlScreen extends React.Component {
       "deviceId",
       "Could not find Device ID"
     );
-    this.setState({ deviceId });
+
     console.log(`control screen got id: ${deviceId}`);
     try {
-      //   const deviceInfo = await ParticleWebService.getDeviceInfo(
-      //     deviceId,
-      //     AppConfig.testAccessToken
-      //   );
-      //   console.log(deviceInfo);
+      const deviceInfo = await ParticleWebService.getDeviceInfo(
+        deviceId,
+        AppConfig.testAccessToken
+      );
+      console.log(deviceInfo);
+      this.setState({
+        deviceId: deviceId,
+        deviceInfo: deviceInfo
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
   async componentDidMount() {
-    await this.getDeviceInfo();
+    try {
+      console.log("getting device info...");
+      await this.getDeviceInfo();
+    } catch (err) {}
   }
 
   render() {
+    const device = this.state.deviceInfo;
+
     return (
       <View style={styles.screenContainer}>
         <View style={styles.bigHeaderContainer}>
-          <Text style={styles.bigHeader}>Device Control</Text>
-          <Text style={styles.subHeader}>Shows device controls and info</Text>
+          <Text style={styles.bigHeader}>
+            {device != null ? this.state.deviceInfo.name : "Loading Name..."}
+          </Text>
+          <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
         <View>
-          <Text>Device ID: {this.state.deviceId}</Text>
+          <Text>Functions:</Text>
+          <Text>
+            {device && device.functions != null
+              ? device.functions
+              : "Could not find functions"}
+          </Text>
+          <Text />
+          <Text>Variables:</Text>
+          <Text>
+            {device && device.variables != null
+              ? device.functions
+              : "Could not find functions"}
+          </Text>
         </View>
       </View>
     );
