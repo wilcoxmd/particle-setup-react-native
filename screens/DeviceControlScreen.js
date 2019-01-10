@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import CustomStyles from "../styleconfig";
 import ParticleWebService from "../services/ParticleWebService";
 import AppConfig from "../config";
+import { DeviceFunctionList } from "../components/DeviceFunctionList";
+import { DeviceVariableList } from "../components/DeviceVariableList";
 
 export class DeviceControlScreen extends React.Component {
   constructor(props) {
@@ -44,6 +46,7 @@ export class DeviceControlScreen extends React.Component {
 
   render() {
     const device = this.state.deviceInfo;
+
     let deviceName;
     if (device != null && device.name === null) {
       deviceName = "Unnamed Device";
@@ -59,20 +62,24 @@ export class DeviceControlScreen extends React.Component {
           </Text>
           <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
-        <View>
+        <View style={styles.mainContainer}>
           <Text>Functions:</Text>
-          <Text>
-            {device && device.functions != null
-              ? device.functions
-              : "Could not find functions"}
-          </Text>
           <Text />
+          {device && device.functions != null ? (
+            <DeviceFunctionList functionList={device.functions} />
+          ) : (
+            <Text>Could not find functions</Text>
+          )}
+          <Text />
+
           <Text>Variables:</Text>
-          <Text>
-            {device && device.variables != null
-              ? device.functions
-              : "Could not find functions"}
-          </Text>
+          <Text />
+
+          {device && device.variables != null ? (
+            <DeviceVariableList varList={Object.keys(device.variables)} />
+          ) : (
+            <Text>Could not find variables</Text>
+          )}
         </View>
       </View>
     );
@@ -87,5 +94,8 @@ const styles = StyleSheet.create({
   subHeader: CustomStyles.subHeader,
   readyButtonContainer: {
     alignItems: "center"
+  },
+  mainContainer: {
+    padding: 10
   }
 });
