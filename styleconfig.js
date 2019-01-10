@@ -75,6 +75,18 @@ const CustomStyles = {
     marginTop: 5,
     fontSize: 14,
     color: "#303030"
+  },
+  deviceOperation: {
+    backgroundColor: "white",
+    padding: 10,
+    marginBottom: 10,
+    shadowColor: "#D3D3D3",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2
+  },
+  operationHeader: {
+    marginBottom: 10
   }
 };
 
