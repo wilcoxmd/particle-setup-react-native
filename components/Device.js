@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { OnlineIndicator } from "./OnlineIndicator";
 
 export class Device extends React.Component {
   render() {
@@ -8,6 +9,10 @@ export class Device extends React.Component {
         style={styles.deviceContainer}
         onPress={() => this.props.handlePress(this.props.device.id)}
       >
+        <View style={styles.indicationContainer}>
+          <OnlineIndicator connected={this.props.device.connected} />
+        </View>
+
         <View style={styles.textContainer}>
           <Text style={styles.primaryText}>
             {this.props.device.name ? this.props.device.name : "Unnamed Device"}
@@ -24,6 +29,7 @@ export class Device extends React.Component {
 const styles = StyleSheet.create({
   deviceContainer: {
     height: 64,
+    flexDirection: "row",
     backgroundColor: "white",
     marginBottom: 10,
     shadowColor: "#D3D3D3",
@@ -32,7 +38,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2
   },
   textContainer: {
-    marginLeft: 16
+    flexDirection: "column"
   },
   primaryText: {
     marginTop: 14,
@@ -44,5 +50,12 @@ const styles = StyleSheet.create({
     fontWeight: "100",
     marginTop: 3,
     color: "#303030"
+  },
+  indicationContainer: {
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 20,
+    marginRight: 20
   }
 });
