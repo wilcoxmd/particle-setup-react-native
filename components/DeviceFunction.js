@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import CustomStyles from "../styleconfig";
 import ParticleWebService from "../services/ParticleWebService";
+import AppConfig from "../config";
 
 export class DeviceFunction extends React.Component {
   constructor(props) {
@@ -16,6 +17,30 @@ export class DeviceFunction extends React.Component {
       functionArgText: "",
       functionResponse: null
     };
+  }
+
+  async callFunction() {
+    this.setState({ functionResponse: "Connecting..." });
+    try {
+      console.log(
+        `function inputs -
+        function: ${this.props.funcName},
+        id: ${this.props.device.id},
+        access_token: ${AppConfig.testAccessToken}
+        arg: ${this.state.functionArgText},`
+      );
+      const response = await ParticleWebService.callDeviceFunction(
+        this.props.funcName,
+        this.props.device.id,
+        AppConfig.testAccessToken,
+        this.state.functionArgText
+      );
+      this.setState({ functionResponse: `Response: ${response.return_value}` });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      this.setState({ functionResponse: "Try again!" });
+    }
   }
 
   render() {
@@ -32,7 +57,7 @@ export class DeviceFunction extends React.Component {
             autoCorrect={false}
             autoCapitalize="none"
           />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.callFunction()}>
             <Text style={styles.functionButton}>Call</Text>
           </TouchableOpacity>
           <Text style={styles.repsonseText}>
@@ -47,27 +72,15 @@ export class DeviceFunction extends React.Component {
 const styles = StyleSheet.create({
   deviceFunction: CustomStyles.deviceOperation,
   functionHeader: CustomStyles.operationHeader,
-  functionBody: {
-    flexDirection: "row"
-  },
-  functionButton: {
-    backgroundColor: "#D3D3D3",
-    width: 80,
-    height: 35,
-    textAlign: "center",
-    paddingTop: 8,
-    marginLeft: 10
-  },
+  functionBody: CustomStyles.operationBody,
+  functionButton: CustomStyles.operationButton,
   argInput: {
     height: 35,
     borderColor: "gray",
     borderWidth: 1,
-    width: 100,
+    width: 125,
     padding: 10,
     backgroundColor: "white"
   },
-  repsonseText: {
-    marginLeft: 10,
-    paddingTop: 8
-  }
+  repsonseText: CustomStyles.operationResponse
 });

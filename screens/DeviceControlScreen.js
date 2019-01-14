@@ -62,27 +62,25 @@ export class DeviceControlScreen extends React.Component {
           </Text>
           <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
-        <View style={styles.mainContainer}>
-          <ScrollView>
+        <ScrollView>
+          <View>
             <Text>Functions:</Text>
             <Text />
             {device && device.functions != null ? (
-              <DeviceFunctionList functionList={device.functions} />
+              <DeviceFunctionList device={device} />
             ) : (
               <Text>Could not find functions</Text>
             )}
-            <Text />
 
             <Text>Variables:</Text>
-            <Text />
 
             {device && device.variables != null ? (
               <DeviceVariableList varList={Object.keys(device.variables)} />
             ) : (
               <Text>Could not find variables</Text>
             )}
-          </ScrollView>
-        </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }

@@ -6,8 +6,12 @@ export class DeviceFunctionList extends React.Component {
   render() {
     return (
       <View>
-        {this.props.functionList.map((item, index) => (
-          <DeviceFunction key={index} funcName={item} />
+        {this.props.device.functions.map((item, index) => (
+          <DeviceFunction
+            key={index}
+            funcName={item}
+            device={this.props.device}
+          />
         ))}
       </View>
     );

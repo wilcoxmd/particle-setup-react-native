@@ -87,6 +87,21 @@ const CustomStyles = {
   },
   operationHeader: {
     marginBottom: 10
+  },
+  operationBody: {
+    flexDirection: "row"
+  },
+  operationButton: {
+    backgroundColor: "#D3D3D3",
+    width: 80,
+    height: 35,
+    textAlign: "center",
+    paddingTop: 8,
+    marginLeft: 10
+  },
+  operationResponse: {
+    marginLeft: 10,
+    paddingTop: 8
   }
 };
 
