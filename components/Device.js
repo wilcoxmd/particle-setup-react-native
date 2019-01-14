@@ -7,7 +7,9 @@ export class Device extends React.Component {
     return (
       <TouchableOpacity
         style={styles.deviceContainer}
-        onPress={() => this.props.handlePress(this.props.device.id)}
+        onPress={() =>
+          this.props.handlePress(this.props.device.id, this.props.device.name)
+        }
       >
         <View style={styles.indicationContainer}>
           <OnlineIndicator connected={this.props.device.connected} />

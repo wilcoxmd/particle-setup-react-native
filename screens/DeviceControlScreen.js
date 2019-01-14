@@ -11,6 +11,7 @@ export class DeviceControlScreen extends React.Component {
     super(props);
     this.state = {
       deviceId: null,
+      deviceName: null,
       deviceInfo: null
     };
   }
@@ -21,7 +22,15 @@ export class DeviceControlScreen extends React.Component {
       "Could not find Device ID"
     );
 
+    const deviceName = this.props.navigation.getParam(
+      "deviceName",
+      "Could not find Device Name"
+    );
+
+    this.setState({ deviceId: deviceId, deviceName: deviceName });
+
     console.log(`control screen got id: ${deviceId}`);
+    console.log(`control screen got name: ${deviceName}`);
     try {
       const deviceInfo = await ParticleWebService.getDeviceInfo(
         deviceId,
@@ -57,9 +66,7 @@ export class DeviceControlScreen extends React.Component {
     return (
       <View style={styles.screenContainer}>
         <View style={styles.bigHeaderContainer}>
-          <Text style={styles.bigHeader}>
-            {device ? deviceName : "Loading Name..."}
-          </Text>
+          <Text style={styles.bigHeader}>{this.state.deviceName}</Text>
           <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
         <ScrollView>

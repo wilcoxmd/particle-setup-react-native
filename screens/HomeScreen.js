@@ -19,8 +19,11 @@ export class HomeScreen extends React.Component {
     };
   };
 
-  goToDevice(deviceId) {
-    this.props.navigation.navigate("DeviceControl", { deviceId: deviceId });
+  goToDevice(deviceId, deviceName) {
+    this.props.navigation.navigate("DeviceControl", {
+      deviceId: deviceId,
+      deviceName: deviceName
+    });
   }
 
   render() {
