@@ -22,13 +22,6 @@ export class DeviceFunction extends React.Component {
   async callFunction() {
     this.setState({ functionResponse: "Connecting..." });
     try {
-      console.log(
-        `function inputs -
-        function: ${this.props.funcName},
-        id: ${this.props.device.id},
-        access_token: ${AppConfig.testAccessToken}
-        arg: ${this.state.functionArgText},`
-      );
       const response = await ParticleWebService.callDeviceFunction(
         this.props.funcName,
         this.props.device.id,
@@ -36,10 +29,9 @@ export class DeviceFunction extends React.Component {
         this.state.functionArgText
       );
       this.setState({ functionResponse: `Response: ${response.return_value}` });
-      console.log(response);
     } catch (err) {
       console.log(err);
-      this.setState({ functionResponse: "Try again!" });
+      this.setState({ functionResponse: "Error! Check connection." });
     }
   }
 

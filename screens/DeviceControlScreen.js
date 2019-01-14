@@ -64,15 +64,11 @@ export class DeviceControlScreen extends React.Component {
         </View>
         <ScrollView>
           <View>
-            <Text>Functions:</Text>
-            <Text />
             {device && device.functions != null ? (
               <DeviceFunctionList device={device} />
             ) : (
               <Text>Could not find functions</Text>
             )}
-
-            <Text>Variables:</Text>
 
             {device && device.variables != null ? (
               <DeviceVariableList device={device} />
