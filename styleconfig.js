@@ -76,6 +76,15 @@ const CustomStyles = {
     fontSize: 14,
     color: "#303030"
   },
+  listHeader: {
+    fontSize: 18,
+    fontWeight: "500",
+    textTransform: "uppercase",
+    color: "#303030",
+    marginLeft: 10,
+    marginTop: 20,
+    marginBottom: 20
+  },
   deviceOperation: {
     backgroundColor: "white",
     padding: 10,
