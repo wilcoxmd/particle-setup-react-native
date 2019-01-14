@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import CustomStyles from "../styleconfig";
+import ParticleWebService from "../services/ParticleWebService";
+import AppConfig from "../config";
 
 export class DeviceVariable extends React.Component {
   constructor(props) {
@@ -8,6 +10,20 @@ export class DeviceVariable extends React.Component {
     this.state = {
       variableValue: null
     };
+  }
+
+  async fetchVariable() {
+    try {
+      const response = await ParticleWebService.fetchDeviceVariable(
+        this.props.varName,
+        this.props.device.id,
+        AppConfig.testAccessToken
+      );
+      console.log(response);
+      this.setState({ variableValue: response.result.toString() });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
@@ -19,7 +35,7 @@ export class DeviceVariable extends React.Component {
           <Text>{this.props.varName}</Text>
         </View>
         <View style={styles.variableBody}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.fetchVariable()}>
             <Text style={styles.variableButton}>Get Value</Text>
           </TouchableOpacity>
           <Text style={styles.repsonseText}>

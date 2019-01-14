@@ -75,7 +75,7 @@ export class DeviceControlScreen extends React.Component {
             <Text>Variables:</Text>
 
             {device && device.variables != null ? (
-              <DeviceVariableList varList={Object.keys(device.variables)} />
+              <DeviceVariableList device={device} />
             ) : (
               <Text>Could not find variables</Text>
             )}
