@@ -37,6 +37,14 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
+# Dynamic Macros
+/ios/Exponent/Supporting/EXBuildConstants.plist.bak
+/ios/Exponent/Supporting/EXBuildConstants.plist.json
+/ios/Exponent/Supporting/EXBuildConstants.plist
+/android/expoview/src/main/java/host/exp/exponent/generated/ExponentBuildConstants.java
+/android/app/src/androidTest/java/host/exp/exponent/generated/TestBuildConstants.java
+.kernel-ngrok-url
+
 # Android/IntelliJ
 #
 build/
