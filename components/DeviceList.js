@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import ParticleWebService from "../services/ParticleWebService";
 import AppConfig from "../config";
+import { Spinner } from "./Spinner";
 
 export class DeviceList extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export class DeviceList extends React.Component {
     this.state = {
       deviceList: [],
       message: "Fetching your devices...",
-      refreshing: false
+      refreshing: false,
+      loading: true
     };
   }
 
@@ -41,6 +43,7 @@ export class DeviceList extends React.Component {
   async componentDidMount() {
     try {
       await this.pullDeviceData();
+      this.setState({ loading: false });
     } catch (err) {
       console.log(err);
     }
@@ -81,6 +84,13 @@ export class DeviceList extends React.Component {
   }
 
   render() {
+    const spinnerContainer = (
+      <View style={styles.spinnerContainer}>
+        <Spinner />
+        <Text style={{ marginTop: 15 }}>Fetching your devices...</Text>
+      </View>
+    );
+
     return (
       <ScrollView
         refreshControl={
@@ -91,7 +101,7 @@ export class DeviceList extends React.Component {
           />
         }
       >
-        {this.showContent()}
+        {this.state.loading ? spinnerContainer : this.showContent()}
       </ScrollView>
     );
   }
@@ -110,5 +120,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 40
+  },
+  spinnerContainer: {
+    padding: 10,
+    alignItems: "center",
+    marginTop: 100
   }
 });
