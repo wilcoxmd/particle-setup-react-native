@@ -69,15 +69,20 @@ const DrawerNavigator = createDrawerNavigator({
   LogOut: LogOut
 });
 
+// const TestScreen = createStackNavigator({
+//   TestScreen: WifiConnectSuccessScreen //edit this to a particular screen you want to test
+// });
+
 export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
       App: DrawerNavigator,
       Auth: AuthStack
+      //Test: TestScreen //remove for actual use.
     },
     {
-      initialRouteName: "AuthLoading"
+      initialRouteName: "AuthLoading" //change to AuthLoading for everything to work correctly
     }
   )
 );

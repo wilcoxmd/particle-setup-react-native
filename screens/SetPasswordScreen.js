@@ -2,14 +2,10 @@ import React from "react";
 import {
   View,
   Text,
-  Button,
-  Image,
   TextInput,
-  AsyncStorage,
   TouchableOpacity,
   StyleSheet
 } from "react-native";
-import { createStackNavigator, createAppContainer } from "react-navigation";
 import CustomStyles from "../styleconfig";
 import AppConfig from "../config";
 import ParticleDeviceSetup from "../services/ParticleDeviceSetup";
@@ -67,23 +63,31 @@ export class SetPasswordScreen extends React.Component {
     const { navigation } = this.props;
     const network = navigation.getParam("network", "get networks error.");
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ marginBottom: 10 }}>
-          We'll be connecting to: {network.ssid}
-        </Text>
-        <Text style={{ marginBottom: 10 }}>Enter your network password:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={text => this.setState({ passwordText: text })}
-          value={this.state.passwordText}
-          placeholder="Password"
-          autoCorrect={false}
-          autoCapitalize="none"
-          secureTextEntry={true}
-        />
-        <TouchableOpacity onPress={async () => this.connectToNetwork()}>
-          <Text style={styles.button}>{this.state.buttonText}</Text>
-        </TouchableOpacity>
+      <View style={styles.screenContainer}>
+        <View style={styles.bigHeaderContainer}>
+          <Text style={styles.bigHeader}>Connect to Network</Text>
+          <Text style={styles.subHeader}>{network.ssid}</Text>
+        </View>
+        <View style={styles.mainContainer}>
+          <Text style={{ marginBottom: 20 }}>
+            Enter the password for "{network.ssid}":
+          </Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={text => this.setState({ passwordText: text })}
+            value={this.state.passwordText}
+            placeholder="Password"
+            autoCorrect={false}
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
+          <TouchableOpacity
+            style={{ marginTop: 10 }}
+            onPress={async () => this.connectToNetwork()}
+          >
+            <Text style={styles.button}>{this.state.buttonText}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -91,5 +95,14 @@ export class SetPasswordScreen extends React.Component {
 
 const styles = {
   input: CustomStyles.textInput,
-  button: CustomStyles.buttonStyles
+  button: CustomStyles.buttonStyles,
+  screenContainer: CustomStyles.screenContainer,
+  bigHeaderContainer: CustomStyles.bigHeaderContainer,
+  bigHeader: CustomStyles.bigHeader,
+  subHeader: CustomStyles.subHeader,
+  mainContainer: {
+    marginTop: 40,
+    alignItems: "center",
+    justifyContent: "center"
+  }
 };

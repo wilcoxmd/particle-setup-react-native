@@ -30,25 +30,38 @@ export class WifiConnectSuccessScreen extends React.Component {
 
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text style={{ width: 250, marginBottom: 25 }}>
-          Your device will now connect. Return to the home screen by tapping the
-          Done button below
-        </Text>
-        <TouchableOpacity onPress={() => this.goBackHome()}>
-          <Text style={styles.button}>Done</Text>
-        </TouchableOpacity>
+      <View style={styles.screenContainer}>
+        <View style={styles.bigHeaderContainer}>
+          <Text style={styles.bigHeader}>Connection Success!</Text>
+          <Text style={styles.subHeader}>Nice work.</Text>
+        </View>
+        <View style={styles.mainContainer}>
+          <Text style={styles.successMessage}>
+            Your device will now connect to your Wi-Fi network. Return to the
+            home screen by tapping the Done button below.
+          </Text>
+          <TouchableOpacity onPress={() => this.goBackHome()}>
+            <Text style={styles.button}>Done</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
 const styles = {
-  button: CustomStyles.buttonStyles
+  button: CustomStyles.buttonStyles,
+  bigHeaderContainer: CustomStyles.bigHeaderContainer,
+  screenContainer: CustomStyles.screenContainer,
+  bigHeader: CustomStyles.bigHeader,
+  subHeader: CustomStyles.subHeader,
+  mainContainer: {
+    padding: 25,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  successMessage: {
+    marginTop: 25,
+    marginBottom: 50
+  }
 };
