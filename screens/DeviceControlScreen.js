@@ -97,6 +97,7 @@ export class DeviceControlScreen extends React.Component {
           <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
         {this.state.loading ? spinner : deviceControls}
+        <View style={{ height: 50 }} />
       </View>
     );
   }
