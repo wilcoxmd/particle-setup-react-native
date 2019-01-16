@@ -1,10 +1,16 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  ActivityIndicator
+} from "react-native";
 import CustomStyles from "../styleconfig";
 import ParticleWebService from "../services/ParticleWebService";
 import AppConfig from "../config";
-import { DeviceFunctionList } from "../components/DeviceFunctionList";
-import { DeviceVariableList } from "../components/DeviceVariableList";
+import { DeviceControls } from "../components/DeviceControls";
+import { Spinner } from "../components/Spinner";
 
 export class DeviceControlScreen extends React.Component {
   constructor(props) {
@@ -12,7 +18,8 @@ export class DeviceControlScreen extends React.Component {
     this.state = {
       deviceId: null,
       deviceName: null,
-      deviceInfo: null
+      deviceInfo: null,
+      loading: true
     };
   }
 
@@ -41,6 +48,8 @@ export class DeviceControlScreen extends React.Component {
         deviceId: deviceId,
         deviceInfo: deviceInfo
       });
+
+      return deviceInfo;
     } catch (err) {
       console.log(err);
     }
@@ -50,17 +59,41 @@ export class DeviceControlScreen extends React.Component {
     try {
       console.log("getting device info...");
       await this.getDeviceInfo();
+      this.setState({ loading: false });
     } catch (err) {}
   }
 
   render() {
     const device = this.state.deviceInfo;
 
-    let deviceName;
     if (device != null && device.name === null) {
       deviceName = "Unnamed Device";
     } else if (device != null && device.name) {
       deviceName = device.name;
+    }
+
+    const spinner = (
+      <View style={styles.spinnerContainer}>
+        <Spinner />
+      </View>
+    );
+
+    let deviceControls;
+    if (device != null && device.connected) {
+      deviceControls = <DeviceControls deviceInfo={this.state.deviceInfo} />;
+    } else {
+      deviceControls = (
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 50
+          }}
+        >
+          <Text>This device is offline</Text>
+          <Text>Bring the device back online to view controls</Text>
+        </View>
+      );
     }
 
     return (
@@ -69,21 +102,7 @@ export class DeviceControlScreen extends React.Component {
           <Text style={styles.bigHeader}>{this.state.deviceName}</Text>
           <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
-        <ScrollView>
-          <View>
-            {device && device.functions != null ? (
-              <DeviceFunctionList device={device} />
-            ) : (
-              <Text>Could not find functions</Text>
-            )}
-
-            {device && device.variables != null ? (
-              <DeviceVariableList device={device} />
-            ) : (
-              <Text>Could not find variables</Text>
-            )}
-          </View>
-        </ScrollView>
+        {this.state.loading ? spinner : deviceControls}
       </View>
     );
   }
@@ -98,7 +117,9 @@ const styles = StyleSheet.create({
   readyButtonContainer: {
     alignItems: "center"
   },
-  mainContainer: {
-    padding: 10
+  spinnerContainer: {
+    padding: 10,
+    alignItems: "center",
+    marginTop: 100
   }
 });

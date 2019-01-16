@@ -58,8 +58,8 @@ const CustomStyles = {
     backgroundColor: "#F0F0F0"
   },
   bigHeaderContainer: {
-    height: 150,
     justifyContent: "center",
+    height: 150,
     padding: 10,
     backgroundColor: "white",
     borderBottomColor: "#A9A9A9",
