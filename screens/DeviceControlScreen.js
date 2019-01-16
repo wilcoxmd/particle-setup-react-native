@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  RefreshControl
+} from "react-native";
 import CustomStyles from "../styleconfig";
 import ParticleWebService from "../services/ParticleWebService";
 import AppConfig from "../config";
@@ -13,19 +19,20 @@ export class DeviceControlScreen extends React.Component {
       deviceId: null,
       deviceName: null,
       deviceInfo: null,
-      loading: true
+      loading: true,
+      refreshing: false
     };
   }
 
   async getDeviceInfo() {
     const deviceId = this.props.navigation.getParam(
       "deviceId",
-      "Could not find Device ID"
+      "Could not get Device ID"
     );
 
     const deviceName = this.props.navigation.getParam(
       "deviceName",
-      "Could not find Device Name"
+      "Could not get Device Name"
     );
 
     this.setState({ deviceId: deviceId, deviceName: deviceName });
@@ -38,9 +45,11 @@ export class DeviceControlScreen extends React.Component {
         AppConfig.testAccessToken
       );
       console.log(deviceInfo);
+
       this.setState({
         deviceId: deviceId,
-        deviceInfo: deviceInfo
+        deviceInfo: deviceInfo,
+        deviceName: deviceInfo.name
       });
 
       return deviceInfo;
@@ -55,6 +64,16 @@ export class DeviceControlScreen extends React.Component {
       await this.getDeviceInfo();
       this.setState({ loading: false });
     } catch (err) {}
+  }
+
+  async refreshDeviceControls() {
+    this.setState({ refreshing: true, message: "" });
+    try {
+      await this.getDeviceInfo();
+      this.setState({ refreshing: false });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
@@ -81,11 +100,22 @@ export class DeviceControlScreen extends React.Component {
           style={{
             justifyContent: "center",
             alignItems: "center",
-            marginTop: 50
+            marginTop: 50,
+            padding: 20
           }}
         >
-          <Text>This device is offline</Text>
-          <Text>Bring the device back online to view controls</Text>
+          <Text
+            style={{
+              marginBottom: 15,
+              fontSize: 16,
+              fontWeight: "400"
+            }}
+          >
+            This device is offline
+          </Text>
+          <Text>
+            Bring the device back online, then pull to refresh and view controls
+          </Text>
         </View>
       );
     }
@@ -96,8 +126,17 @@ export class DeviceControlScreen extends React.Component {
           <Text style={styles.bigHeader}>{this.state.deviceName}</Text>
           <Text style={styles.subHeader}>ID: {this.state.deviceId}</Text>
         </View>
-        {this.state.loading ? spinner : deviceControls}
-        <View style={{ height: 50 }} />
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.refreshDeviceControls.bind(this)}
+              title="Refreshing..."
+            />
+          }
+        >
+          {this.state.loading ? spinner : deviceControls}
+        </ScrollView>
       </View>
     );
   }
