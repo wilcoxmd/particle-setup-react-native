@@ -20,6 +20,7 @@ export class HomeScreen extends React.Component {
   };
 
   goToDevice(deviceId, deviceName) {
+    if (deviceName === null) deviceName = "Unnamed Device";
     this.props.navigation.navigate("DeviceControl", {
       deviceId: deviceId,
       deviceName: deviceName

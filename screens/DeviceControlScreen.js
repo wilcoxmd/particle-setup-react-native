@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  ActivityIndicator
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import CustomStyles from "../styleconfig";
 import ParticleWebService from "../services/ParticleWebService";
 import AppConfig from "../config";
