@@ -1,4 +1,3 @@
-const particleApiEndpoint = "https://api.particle.io/v1";
 import fetch from "react-native-fetch-polyfill";
 
 const particleAPI = "https://api.particle.io/v1";
