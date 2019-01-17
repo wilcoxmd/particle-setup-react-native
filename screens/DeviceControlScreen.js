@@ -11,6 +11,7 @@ import ParticleWebService from "../services/ParticleWebService";
 import AppConfig from "../config";
 import { DeviceControls } from "../components/DeviceControls";
 import { Spinner } from "../components/Spinner";
+import GoHomeButton from "../components/GoHomeButton";
 
 export class DeviceControlScreen extends React.Component {
   constructor(props) {
@@ -23,6 +24,14 @@ export class DeviceControlScreen extends React.Component {
       refreshing: false
     };
   }
+
+  static navigationOptions = function(props) {
+    return {
+      title: "Device Control",
+      headerVisible: true,
+      headerLeft: <GoHomeButton />
+    };
+  };
 
   async getDeviceInfo() {
     const deviceId = this.props.navigation.getParam(

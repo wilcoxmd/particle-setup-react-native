@@ -1,20 +1,6 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Button,
-  Image,
-  TextInput,
-  AsyncStorage,
-  TouchableOpacity,
-  StyleSheet
-} from "react-native";
-import {
-  createStackNavigator,
-  createAppContainer,
-  NavigationActions,
-  StackActions
-} from "react-navigation";
+import { View, Text, TouchableOpacity } from "react-native";
+import { NavigationActions, StackActions } from "react-navigation";
 import CustomStyles from "../styleconfig";
 
 export class WifiConnectSuccessScreen extends React.Component {
